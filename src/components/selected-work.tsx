@@ -21,7 +21,7 @@ export function SelectedWork() {
             {/* Área da Imagem */}
             <div className="aspect-video relative overflow-hidden bg-zinc-950">
               <Image
-                src="/images/mockvioslabs.png"
+                src="/Images/mockvioslabs.png"
                 alt="Dashboard da plataforma Vios Labs"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -43,7 +43,7 @@ export function SelectedWork() {
             {/* Área da Imagem */}
             <div className="aspect-video relative overflow-hidden bg-zinc-950">
               <Image
-                src="/images/mockuplevelmktp.png"
+                src="/Images/mockuplevelmktp.png"
                 alt="Landing page Uplevel Marketplaces"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
