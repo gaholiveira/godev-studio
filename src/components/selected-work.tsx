@@ -1,4 +1,4 @@
-import { LayoutTemplate } from "lucide-react";
+import Image from "next/image";
 
 export function SelectedWork() {
   return (
@@ -16,38 +16,48 @@ export function SelectedWork() {
 
         {/* Grid de Projetos */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Projeto 1: Fintech Dashboard */}
+          {/* Projeto 1: VIOS */}
           <div className="group border border-zinc-800 bg-zinc-900 rounded-lg overflow-hidden">
             {/* Área da Imagem */}
-            <div className="aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center overflow-hidden">
-              <div className="bg-zinc-950 rounded-lg m-4 w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                <LayoutTemplate className="w-16 h-16 text-zinc-700" />
-              </div>
+            <div className="aspect-video relative overflow-hidden bg-zinc-950">
+              <Image
+                src="/images/mockvioslabs.png"
+                alt="Dashboard da plataforma Vios Labs"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
 
             {/* Rodapé do Card */}
             <div className="p-6">
-              <h3 className="text-xl font-bold text-white mb-2">Neon Finance</h3>
+              <h3 className="text-xl font-bold text-white mb-2">VIOS Labs</h3>
               <p className="text-zinc-400">
-                Real-time crypto dashboard with WebSockets.
+                Plataforma D2C completa com gestão de estoque e checkout
+                otimizado.
               </p>
             </div>
           </div>
 
-          {/* Projeto 2: AI Landing Page */}
+          {/* Projeto 2: Uplevel */}
           <div className="group border border-zinc-800 bg-zinc-900 rounded-lg overflow-hidden">
             {/* Área da Imagem */}
-            <div className="aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center overflow-hidden">
-              <div className="bg-zinc-950 rounded-lg m-4 w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                <LayoutTemplate className="w-16 h-16 text-zinc-700" />
-              </div>
+            <div className="aspect-video relative overflow-hidden bg-zinc-950">
+              <Image
+                src="/images/mockuplevelmktp.png"
+                alt="Landing page Uplevel Marketplaces"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
 
             {/* Rodapé do Card */}
             <div className="p-6">
-              <h3 className="text-xl font-bold text-white mb-2">Vision AI</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Uplevel Marketplaces
+              </h3>
               <p className="text-zinc-400">
-                High-conversion landing page for LLM startup.
+                Landing Page de alta performance focada em conversão de leads
+                B2B.
               </p>
             </div>
           </div>
