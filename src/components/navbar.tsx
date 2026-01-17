@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   return (
@@ -31,9 +30,12 @@ export function Navbar() {
         </nav>
 
         {/* CTA à direita */}
-        <Button size="sm" variant="default" className="bg-white text-black hover:bg-zinc-200">
+        <a
+          href="#pricing"
+          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-9 px-4 bg-white text-black hover:bg-zinc-200"
+        >
           Começar
-        </Button>
+        </a>
       </div>
     </header>
   );
