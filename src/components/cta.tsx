@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-
 export function CTA() {
   return (
     <section className="py-32 relative overflow-hidden bg-zinc-950">
@@ -22,15 +20,20 @@ export function CTA() {
 
           {/* Botões */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-zinc-200"
+            <a
+              href="#pricing"
+              className="h-11 px-8 rounded-md bg-white text-black hover:bg-zinc-200 transition-colors font-medium text-sm flex items-center justify-center"
             >
               Assinar agora
-            </Button>
-            <Button variant="ghost" className="text-white hover:bg-zinc-900">
+            </a>
+            <a
+              href="https://cal.com/gabriel-oliveira-8ajlid/discovery-call-godev-studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-11 px-8 rounded-md border border-zinc-800 bg-transparent text-white hover:bg-zinc-900 transition-colors font-medium text-sm flex items-center justify-center"
+            >
               Agendar conversa
-            </Button>
+            </a>
           </div>
         </div>
       </div>

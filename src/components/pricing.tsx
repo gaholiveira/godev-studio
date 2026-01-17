@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 export function Pricing() {
@@ -126,9 +125,14 @@ export function Pricing() {
               </li>
             </ul>
 
-            <button className="w-full h-9 px-4 py-2 rounded-md border border-zinc-700 bg-transparent text-white hover:bg-zinc-800 hover:border-zinc-600 transition-colors font-medium text-sm">
+            <a
+              href="https://buy.stripe.com/5kQ14nbbh17a0ji2e8dMI00"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-9 px-4 py-2 rounded-md border border-zinc-700 bg-transparent text-white hover:bg-zinc-800 hover:border-zinc-600 transition-colors font-medium text-sm flex items-center justify-center"
+            >
               Começar agora
-            </button>
+            </a>
           </div>
 
           {/* Card 2: Pro - DESTAQUE */}
@@ -239,17 +243,28 @@ export function Pricing() {
               </li>
             </ul>
 
-            <Button
-              className="w-full bg-white text-black hover:bg-emerald-400 hover:text-black transition-colors"
+            <a
+              href="https://buy.stripe.com/7sY3cva7d8zC2rq1a4dMI01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-white text-black hover:bg-emerald-400 hover:text-black transition-colors rounded-md px-4 py-2 font-medium text-sm flex items-center justify-center"
             >
               Assinar Pro
-            </Button>
+            </a>
           </div>
         </div>
 
         {/* Texto abaixo dos cards */}
         <p className="text-center text-sm text-zinc-500 mt-12">
-          Precisa de algo customizado para Enterprise? Entre em contato.
+          Precisa de algo customizado para Enterprise?{" "}
+          <a
+            href="https://cal.com/gabriel-oliveira-8ajlid/discovery-call-godev-studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-emerald-400 hover:text-emerald-300 transition-colors underline"
+          >
+            Entre em contato.
+          </a>
         </p>
       </div>
     </section>

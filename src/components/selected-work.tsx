@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function SelectedWork() {
   return (
-    <section className="py-24 bg-zinc-950">
+    <section id="work" className="py-24 bg-zinc-950">
       <div className="container px-4 md:px-6 mx-auto">
         {/* Cabeçalho */}
         <div className="text-center mb-12">

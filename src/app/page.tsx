@@ -42,12 +42,18 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center">
-            <button className="rounded-lg bg-white px-6 py-3 text-base font-medium text-black transition-colors hover:bg-zinc-200">
-              Ver Planos Disponíveis
-            </button>
-            <button className="rounded-lg border border-zinc-800 bg-transparent px-6 py-3 text-base font-medium text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white">
-              Como funciona
-            </button>
+            <a
+              href="#pricing"
+              className="rounded-lg bg-white px-6 py-3 text-base font-medium text-black transition-colors hover:bg-zinc-200"
+            >
+              Começar projeto
+            </a>
+            <a
+              href="#work"
+              className="rounded-lg border border-zinc-800 bg-transparent px-6 py-3 text-base font-medium text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white"
+            >
+              Ver portfólio
+            </a>
           </div>
         </div>
       </main>
