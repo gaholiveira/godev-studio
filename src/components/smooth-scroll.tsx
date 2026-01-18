@@ -18,11 +18,7 @@ export function SmoothScroll() {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
       infinite: false,
-      // Desabilitar interceptação automática de links para controlar manualmente
-      syncTouch: false,
     });
 
     // Registrar a instância globalmente para uso no SmoothScrollLink
