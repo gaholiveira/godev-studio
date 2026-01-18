@@ -67,7 +67,7 @@ export function FAQ() {
               E se eu não gostar do código ou do resultado?
             </AccordionTrigger>
             <AccordionContent className="text-zinc-400 pb-6">
-              O desenvolvimento é iterativo. Se não estiver 100% satisfeito,
+              O desenvolvimento é interativo. Se não estiver 100% satisfeito,
               revisamos o código quantas vezes for necessário até ficar
               perfeito.
             </AccordionContent>
