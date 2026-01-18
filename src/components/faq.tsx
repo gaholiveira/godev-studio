@@ -24,10 +24,10 @@ export function FAQ() {
               Por que não contratar um desenvolvedor full-time?
             </AccordionTrigger>
             <AccordionContent className="text-zinc-400 pb-6">
-              O custo anual de um Sênior ultrapassa R$ 150.000 (salário +
-              benefícios), além do tempo de contratação. Com a GoDev, você tem
-              expertise sênior imediata por uma fração do custo, com a
-              flexibilidade de pausar quando o fluxo de trabalho diminuir.
+              O investimento anual em um Sênior ultrapassa R$ 150.000 (salário +
+              benefícios), além do tempo de contratação. Com a GoDev Studio, você
+              tem expertise sênior imediata por uma fração do investimento, com
+              flexibilidade para pausar quando o fluxo diminuir.
             </AccordionContent>
           </AccordionItem>
 

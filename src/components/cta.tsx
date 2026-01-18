@@ -1,3 +1,5 @@
+import { SmoothScrollLink } from "@/components/smooth-scroll-link";
+
 export function CTA() {
   return (
     <section className="py-32 relative overflow-hidden bg-zinc-950">
@@ -14,25 +16,25 @@ export function CTA() {
 
           {/* Subtítulo */}
           <p className="text-zinc-400 text-lg max-w-xl mx-auto mb-10">
-            Apenas 1 vaga restante para início imediato em Janeiro. Garanta seu
-            sprint.
+            Última vaga disponível para início imediato em Janeiro. Consulte
+            disponibilidade.
           </p>
 
           {/* Botões */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <a
+            <SmoothScrollLink
               href="#pricing"
-              className="h-11 px-8 rounded-md bg-white text-black hover:bg-zinc-200 transition-colors font-medium text-sm flex items-center justify-center"
+              className="min-h-[44px] h-11 px-8 rounded-md bg-white text-black hover:bg-zinc-200 transition-all font-medium text-sm flex items-center justify-center active:scale-95"
             >
-              Assinar agora
-            </a>
+              Iniciar Projeto
+            </SmoothScrollLink>
             <a
               href="https://cal.com/gabriel-oliveira-8ajlid/discovery-call-godev-studio"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-11 px-8 rounded-md border border-zinc-800 bg-transparent text-white hover:bg-zinc-900 transition-colors font-medium text-sm flex items-center justify-center"
+              className="min-h-[44px] h-11 px-8 rounded-md border border-zinc-800 bg-transparent text-white hover:bg-zinc-900 transition-all font-medium text-sm flex items-center justify-center active:scale-95"
             >
-              Agendar conversa
+              Agendar Discovery
             </a>
           </div>
         </div>

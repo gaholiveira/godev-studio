@@ -19,10 +19,10 @@ export function Pricing() {
         {/* Cabeçalho */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">
-            Planos simples e transparentes.
+            Investimento transparente e estratégico.
           </h2>
           <p className="text-zinc-400">
-            Sem surpresas. Pause ou cancele a qualquer momento.
+            Flexibilidade total. Pause quando necessário.
           </p>
         </div>
 
@@ -129,9 +129,9 @@ export function Pricing() {
               href="https://buy.stripe.com/5kQ14nbbh17a0ji2e8dMI00"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full h-9 px-4 py-2 rounded-md border border-zinc-700 bg-transparent text-white hover:bg-zinc-800 hover:border-zinc-600 transition-colors font-medium text-sm flex items-center justify-center"
+              className="w-full min-h-[44px] h-11 px-4 py-2 rounded-md border border-zinc-700 bg-transparent text-white hover:bg-zinc-800 hover:border-zinc-600 transition-all font-medium text-sm flex items-center justify-center active:scale-95"
             >
-              Começar agora
+              Iniciar Projeto
             </a>
           </div>
 
@@ -247,23 +247,23 @@ export function Pricing() {
               href="https://buy.stripe.com/7sY3cva7d8zC2rq1a4dMI01"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-white text-black hover:bg-emerald-400 hover:text-black transition-colors rounded-md px-4 py-2 font-medium text-sm flex items-center justify-center"
+              className="w-full min-h-[44px] h-11 bg-white text-black hover:bg-emerald-400 hover:text-black transition-all rounded-md px-4 py-2 font-medium text-sm flex items-center justify-center active:scale-95"
             >
-              Assinar Pro
+              Explorar Pro
             </a>
           </div>
         </div>
 
         {/* Texto abaixo dos cards */}
         <p className="text-center text-sm text-zinc-500 mt-12">
-          Precisa de algo customizado para Enterprise?{" "}
+          Soluções customizadas para Enterprise?{" "}
           <a
             href="https://cal.com/gabriel-oliveira-8ajlid/discovery-call-godev-studio"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-emerald-400 hover:text-emerald-300 transition-colors underline"
+            className="text-emerald-400 hover:text-emerald-300 transition-all underline min-h-[44px] inline-flex items-center active:scale-95"
           >
-            Entre em contato.
+            Agendar Discovery.
           </a>
         </p>
       </div>
