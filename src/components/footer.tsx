@@ -1,8 +1,15 @@
-import Link from "next/link";
+"use client";
 
-export function Footer() {
+import Link from "next/link";
+import { forwardRef } from "react";
+
+export const Footer = forwardRef<HTMLElement>((props, ref) => {
   return (
-    <footer className="py-8 border-t border-zinc-900 bg-zinc-950 text-zinc-500 text-sm">
+    <footer 
+      ref={ref}
+      className="fixed bottom-0 left-0 right-0 w-full py-8 border-t border-zinc-900 bg-zinc-950 text-zinc-500 text-sm" 
+      style={{ zIndex: 0 }}
+    >
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Logo à esquerda */}
@@ -41,4 +48,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+Footer.displayName = "Footer";

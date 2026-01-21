@@ -35,10 +35,13 @@ export function Pricing() {
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
           {/* Card 1: Core */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ 
+              duration: 0.8,
+              ease: [0.25, 1, 0.5, 1]
+            }}
             className="border border-white/10 bg-white/5 backdrop-blur-md rounded-lg p-8 flex flex-col relative"
           >
             <div className="mb-6">
@@ -97,10 +100,14 @@ export function Pricing() {
 
           {/* Card 2: Scale - RECOMENDADO */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.2,
+              ease: [0.25, 1, 0.5, 1]
+            }}
             className="border border-white/20 bg-white/5 backdrop-blur-md rounded-lg p-8 flex flex-col relative"
           >
             {/* Glow dourado sutil para destacar */}
