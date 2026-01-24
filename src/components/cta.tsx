@@ -1,4 +1,8 @@
+"use client";
+
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
+import { HeadingReveal, ParagraphReveal } from "@/components/text-reveal";
+import { InstantFade } from "@/components/stagger-animation";
 
 export function CTA() {
   return (
@@ -9,19 +13,27 @@ export function CTA() {
       {/* Conteúdo */}
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="text-center">
-          {/* Título */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6">
-            Pronto para escalar sua engenharia?
-          </h2>
+          {/* Título com TextReveal dramático */}
+          <HeadingReveal
+            text="Pronto para escalar sua engenharia?"
+            as="h2"
+            staggerDelay={0.03}
+            duration={1}
+            className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6"
+          />
 
-          {/* Subtítulo */}
-          <p className="text-zinc-400 text-lg max-w-xl mx-auto mb-10">
+          {/* Subtítulo com ParagraphReveal */}
+          <ParagraphReveal
+            delay={0.4}
+            duration={0.8}
+            className="text-zinc-400 text-lg max-w-xl mx-auto mb-10"
+          >
             Última vaga disponível para início imediato em Janeiro. Consulte
             disponibilidade.
-          </p>
+          </ParagraphReveal>
 
-          {/* Botões */}
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+          {/* Botões - NO-MOTION ZONE: fade instantâneo de 0.3s */}
+          <InstantFade delay={0.6} className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <SmoothScrollLink
               href="#pricing"
               className="min-h-[44px] h-11 px-8 rounded-md bg-white text-black hover:bg-zinc-200 transition-all font-medium text-sm flex items-center justify-center active:scale-95"
@@ -36,7 +48,7 @@ export function CTA() {
             >
               Agendar Discovery
             </a>
-          </div>
+          </InstantFade>
         </div>
       </div>
     </section>

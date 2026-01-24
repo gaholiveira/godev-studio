@@ -3,7 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Check } from "lucide-react";
-import { motion } from "framer-motion";
+import { HeadingReveal, ParagraphReveal, KickerReveal } from "@/components/text-reveal";
+import { StaggerContainer, StaggerItem, InstantFade, FadeInView } from "@/components/stagger-animation";
 
 export function Pricing() {
   return (
@@ -21,27 +22,31 @@ export function Pricing() {
       />
 
       <div className="container px-4 md:px-6 mx-auto relative z-10">
-        {/* Cabeçalho */}
+        {/* Cabeçalho com TextReveal */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Investimento transparente e estratégico.
-          </h2>
-          <p className="text-zinc-400">
+          <HeadingReveal
+            text="Investimento transparente e estratégico."
+            as="h2"
+            staggerDelay={0.03}
+            duration={1}
+            className="text-4xl font-bold text-white mb-4"
+          />
+          <ParagraphReveal delay={0.4} className="text-zinc-400">
             Flexibilidade total. Pause quando necessário.
-          </p>
+          </ParagraphReveal>
         </div>
 
-        {/* Cards de Preço */}
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+        {/* Cards de Preço - Stagger Pattern */}
+        <StaggerContainer
+          staggerDelay={0.15}
+          delay={0.2}
+          threshold={0.2}
+          className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8"
+        >
           {/* Card 1: Core */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ 
-              duration: 0.8,
-              ease: [0.25, 1, 0.5, 1]
-            }}
+          <StaggerItem
+            yOffset={30}
+            duration={0.7}
             className="border border-white/10 bg-white/5 backdrop-blur-md rounded-lg p-8 flex flex-col relative"
           >
             <div className="mb-6">
@@ -49,6 +54,7 @@ export function Pricing() {
               <p className="text-sm text-zinc-400 mb-3">
                 Para MVPs e sites institucionais.
               </p>
+              {/* PREÇO - NO-MOTION ZONE: visível instantaneamente */}
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl font-bold text-white">R$ 4.990</span>
                 <span className="text-zinc-400">/mês</span>
@@ -88,6 +94,7 @@ export function Pricing() {
               </li>
             </ul>
 
+            {/* BOTÃO CTA - NO-MOTION ZONE: pronto instantaneamente */}
             <a
               href="https://buy.stripe.com/5kQ14nbbh17a0ji2e8dMI00"
               target="_blank"
@@ -96,18 +103,12 @@ export function Pricing() {
             >
               Selecionar Core
             </a>
-          </motion.div>
+          </StaggerItem>
 
           {/* Card 2: Scale - RECOMENDADO */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ 
-              duration: 0.8,
-              delay: 0.2,
-              ease: [0.25, 1, 0.5, 1]
-            }}
+          <StaggerItem
+            yOffset={30}
+            duration={0.7}
             className="border border-white/20 bg-white/5 backdrop-blur-md rounded-lg p-8 flex flex-col relative"
           >
             {/* Glow dourado sutil para destacar */}
@@ -124,6 +125,7 @@ export function Pricing() {
               <p className="text-sm text-zinc-400 mb-3">
                 Para E-commerces, SaaS e Escala.
               </p>
+              {/* PREÇO - NO-MOTION ZONE: visível instantaneamente */}
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl font-bold text-white">R$ 8.990</span>
                 <span className="text-zinc-400">/mês</span>
@@ -165,6 +167,7 @@ export function Pricing() {
               </li>
             </ul>
 
+            {/* BOTÃO CTA - NO-MOTION ZONE: pronto instantaneamente */}
             <a
               href="https://buy.stripe.com/7sY3cva7d8zC2rq1a4dMI01"
               target="_blank"
@@ -173,26 +176,24 @@ export function Pricing() {
             >
               Assinar Scale
             </a>
-          </motion.div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
 
-        {/* Setup Fee - Texto discreto abaixo dos preços */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        {/* Setup Fee - Texto discreto */}
+        <FadeInView
+          delay={0.5}
+          duration={0.5}
+          yOffset={10}
           className="text-center text-sm text-zinc-500 mt-8"
         >
           Setup Fee: R$ 2.000 (ISENTO para os 3 primeiros parceiros)
-        </motion.p>
+        </FadeInView>
 
-        {/* Texto abaixo dos cards */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+        {/* Texto Enterprise */}
+        <FadeInView
+          delay={0.6}
+          duration={0.5}
+          yOffset={10}
           className="text-center text-sm text-zinc-500 mt-12"
         >
           Soluções customizadas para Enterprise?{" "}
@@ -204,7 +205,7 @@ export function Pricing() {
           >
             Agendar Discovery.
           </a>
-        </motion.p>
+        </FadeInView>
       </div>
     </section>
   );

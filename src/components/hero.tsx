@@ -2,9 +2,12 @@
 
 import { Magnetic } from "@/components/magnetic";
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
-import { TextReveal } from "@/components/text-reveal";
-import { BlurFade } from "@/components/blur-fade";
+import { ParagraphReveal } from "@/components/text-reveal";
+import { InstantFade, FadeInView } from "@/components/stagger-animation";
 import { motion } from "framer-motion";
+
+// Curva de easing cinematográfica (easeOutQuint)
+const CINEMATIC_EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
   return (
@@ -26,44 +29,48 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 py-20">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+        {/* Badge - Fade sutil */}
+        <FadeInView
+          delay={0}
+          duration={0.6}
+          yOffset={-15}
           className="mb-8 rounded-full border border-zinc-800 bg-zinc-900/50 px-4 py-1.5 text-sm text-zinc-300 backdrop-blur-sm"
         >
           Disponibilidade limitada para Janeiro
-        </motion.div>
+        </FadeInView>
 
-        {/* Headline */}
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 max-w-4xl text-center leading-[1.2] md:leading-[1.2]">
-          <TextReveal 
-            text="Seu Parceiro de Engenharia de Produto Sob Demanda." 
-            delay={0.2} 
-            staggerDelay={0.04}
-          />
+        {/* Headline - Animação Cinematográfica palavra por palavra */}
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl text-center leading-[1.2] md:leading-[1.2]">
+          {"Seu Parceiro de Engenharia de Produto Sob Demanda.".split(" ").map((word, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                delay: 0.3 + index * 0.06,
+                ease: CINEMATIC_EASE,
+              }}
+              className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60"
+            >
+              {word}
+              {index < 7 && "\u00A0"}
+            </motion.span>
+          ))}
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-zinc-400 text-lg md:text-xl max-w-2xl text-center mt-6 leading-relaxed md:leading-normal">
-          <BlurFade delay={0.6}>
-            Transformamos visão estratégica em ecossistemas digitais de alta performance.
-          </BlurFade>
-        </p>
+        {/* Subheadline - ParagraphReveal com blur */}
+        <ParagraphReveal 
+          delay={1.2}
+          duration={0.8}
+          className="text-zinc-400 text-lg md:text-xl max-w-2xl text-center mt-6 leading-relaxed md:leading-normal"
+        >
+          Transformamos visão estratégica em ecossistemas digitais de alta performance.
+        </ParagraphReveal>
 
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 1.4,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+        {/* CTA Buttons - NO-MOTION ZONE: fade imperceptível de 0.3s */}
+        <InstantFade 
+          delay={1.8}
           className="mt-10 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center"
         >
           <Magnetic strength={0.3}>
@@ -82,7 +89,7 @@ export function Hero() {
               Explorar Expertise
             </SmoothScrollLink>
           </Magnetic>
-        </motion.div>
+        </InstantFade>
       </div>
     </main>
   );

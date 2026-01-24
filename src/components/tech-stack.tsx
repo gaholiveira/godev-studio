@@ -1,31 +1,17 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { KickerReveal } from "@/components/text-reveal";
+import { StaggerContainer, StaggerItem } from "@/components/stagger-animation";
 
 function TechLogo({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: false,
-    amount: 0.5,
-  });
-
   return (
-    <motion.div
-      ref={ref}
-      animate={{
-        opacity: isInView ? 1 : 0.3,
-        filter: isInView ? "blur(0px)" : "blur(2px)",
-        x: isInView ? 0 : 0,
-      }}
-      transition={{
-        duration: 0.6,
-        ease: [0.25, 1, 0.5, 1],
-      }}
+    <StaggerItem
       className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500"
+      yOffset={15}
+      duration={0.5}
     >
       {children}
-    </motion.div>
+    </StaggerItem>
   );
 }
 
@@ -34,13 +20,21 @@ export function TechStack() {
     <section className="py-24 border-t border-white/5 bg-zinc-950/50">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center justify-center space-y-8 text-center">
-          {/* Label */}
-          <p className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-8">
+          {/* Label com reveal sutil */}
+          <KickerReveal 
+            className="text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-8"
+            delay={0}
+          >
             POWERING NEXT-GEN APPS WITH
-          </p>
+          </KickerReveal>
 
-          {/* Tech Logos Grid */}
-          <div className="grid grid-cols-3 gap-8 md:grid-cols-6 md:gap-12 items-center">
+          {/* Tech Logos Grid - Stagger Waterfall Pattern */}
+          <StaggerContainer
+            staggerDelay={0.08}
+            delay={0.2}
+            threshold={0.3}
+            className="grid grid-cols-3 gap-8 md:grid-cols-6 md:gap-12 items-center"
+          >
             {/* Next.js */}
             <TechLogo>
               <svg
@@ -166,7 +160,7 @@ export function TechStack() {
                 />
               </svg>
             </TechLogo>
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>
