@@ -11,23 +11,25 @@ interface SmoothScrollLinkProps {
   as?: "a" | "button";
 }
 
+// Tipo para a instância do Lenis (genérico para compatibilidade com diferentes versões)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type LenisInstance = any;
+
 // Armazenar a instância global do Lenis
-let lenisInstance: any = null;
+let lenisInstance: LenisInstance = null;
 
 // Função para obter a instância do Lenis
-function getLenisInstance() {
+function getLenisInstance(): LenisInstance {
   // Tenta acessar via window (Lenis pode expor globalmente)
   if (typeof window !== "undefined") {
-    // @ts-ignore
-    const windowLenis = (window as any).lenis;
+    const windowLenis = (window as { lenis?: LenisInstance }).lenis;
     if (windowLenis) {
       return windowLenis;
     }
 
     // Tenta acessar via document.querySelector
-    const lenisElement = document.querySelector(".lenis");
-    if (lenisElement) {
-      // @ts-ignore
+    const lenisElement = document.querySelector(".lenis") as HTMLElement & { lenis?: LenisInstance };
+    if (lenisElement?.lenis) {
       return lenisElement.lenis;
     }
   }
@@ -36,11 +38,10 @@ function getLenisInstance() {
 }
 
 // Função para registrar a instância (será chamada pelo SmoothScroll)
-export function setLenisInstance(lenis: any) {
+export function setLenisInstance(lenis: LenisInstance) {
   lenisInstance = lenis;
   if (typeof window !== "undefined") {
-    // @ts-ignore
-    (window as any).lenis = lenis;
+    (window as { lenis?: LenisInstance }).lenis = lenis;
   }
 }
 
@@ -65,7 +66,7 @@ export function SmoothScrollLink({
     // Extrair o ID do href (remover #)
     const targetId = href.slice(1);
     if (!targetId) {
-      console.warn("SmoothScrollLink: href is just '#' without ID");
+      // Link é apenas "#" sem ID - ignorar silenciosamente em produção
       return;
     }
 
@@ -131,7 +132,7 @@ export function SmoothScrollLink({
         isListening = true;
       }
 
-      // Executar scroll - tentar elemento DOM primeiro, depois string como fallback
+      // Executar scroll com fallback
       try {
         // Método 1: Usando elemento DOM diretamente
         lenis.scrollTo(targetElement, {
@@ -139,7 +140,7 @@ export function SmoothScrollLink({
           easing: exponentialOut,
           offset,
         });
-      } catch (error) {
+      } catch {
         // Método 2: Fallback usando string (seletor CSS)
         lenis.scrollTo(href, {
           duration,

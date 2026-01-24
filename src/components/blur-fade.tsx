@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 // Curva de easing cinematográfica (easeOutQuint)
 const CINEMATIC_EASE = [0.22, 1, 0.36, 1] as const;
@@ -23,26 +22,19 @@ export function BlurFade({
   once = true,
   threshold = 0.3,
 }: BlurFadeProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, amount: threshold });
-
   return (
     <motion.span
-      ref={ref}
       initial={{ 
         opacity: 0, 
         filter: "blur(10px)", 
         y: 20 
       }}
-      animate={isInView ? { 
+      whileInView={{ 
         opacity: 1, 
         filter: "blur(0px)", 
         y: 0 
-      } : {
-        opacity: 0, 
-        filter: "blur(10px)", 
-        y: 20 
       }}
+      viewport={{ once, amount: threshold }}
       transition={{
         duration,
         delay,

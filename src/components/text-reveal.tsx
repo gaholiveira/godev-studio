@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, Variants, useInView } from "framer-motion";
-import { useRef, ElementType, ComponentPropsWithoutRef } from "react";
+import { motion, Variants } from "framer-motion";
 
 // Curva de easing cinematográfica (easeOutQuint) - Apple/Dior style
 const CINEMATIC_EASE = [0.22, 1, 0.36, 1] as const;
@@ -17,8 +16,6 @@ interface TextRevealProps {
   once?: boolean;
   /** Porcentagem do elemento visível para trigger (0-1) */
   threshold?: number;
-  /** Wrapper element: span, h1, h2, h3, p, etc */
-  as?: ElementType;
   /** Se true, anima automaticamente sem esperar viewport (para elementos above-the-fold como Hero) */
   autoPlay?: boolean;
 }
@@ -32,18 +29,8 @@ export function TextReveal({
   duration = 0.8,
   once = true,
   threshold = 0.3,
-  as: Component = "span",
   autoPlay = false,
 }: TextRevealProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, {
-    once,
-    amount: threshold,
-  });
-  
-  // Se autoPlay=true, anima imediatamente sem esperar viewport
-  const shouldAnimate = autoPlay ? true : isInView;
-
   // Divide o texto em palavras ou caracteres
   const items = mode === "char" ? text.split("") : text.split(" ");
 
@@ -60,7 +47,6 @@ export function TextReveal({
   };
 
   // Variantes para cada palavra/caractere - Movimento vertical dramático
-  // Estilo cinematográfico: mask reveal puro (sem opacity para compatibilidade com text-transparent/gradients)
   const itemVariants: Variants = {
     hidden: { 
       y: "110%",
@@ -74,23 +60,16 @@ export function TextReveal({
     },
   };
 
-  // Type-safe motion component
-  const MotionComponent = motion(Component) as React.ComponentType<
-    ComponentPropsWithoutRef<typeof Component> & {
-      ref?: React.Ref<HTMLElement>;
-      variants?: Variants;
-      initial?: string;
-      animate?: string;
-      className?: string;
-    }
-  >;
+  // Props de animação baseado em autoPlay
+  const animationProps = autoPlay
+    ? { animate: "visible" as const }
+    : { whileInView: "visible" as const, viewport: { once, amount: threshold } };
 
   return (
-    <MotionComponent
-      ref={containerRef}
+    <motion.span
       variants={containerVariants}
       initial="hidden"
-      animate={shouldAnimate ? "visible" : "hidden"}
+      {...animationProps}
       className={`inline-block ${className}`}
     >
       {items.map((item, index) => (
@@ -114,26 +93,21 @@ export function TextReveal({
           </motion.span>
         </span>
       ))}
-    </MotionComponent>
+    </motion.span>
   );
 }
 
 // ============================================
 // Variante para títulos grandes (H1, H2)
+// Renderiza como span mas estilizado como heading
 // ============================================
-interface HeadingRevealProps extends Omit<TextRevealProps, 'as'> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-}
-
 export function HeadingReveal({
-  as = "h2",
   staggerDelay = 0.03,
   duration = 1,
   ...props
-}: HeadingRevealProps) {
+}: TextRevealProps) {
   return (
     <TextReveal
-      as={as}
       staggerDelay={staggerDelay}
       duration={duration}
       {...props}
@@ -161,26 +135,19 @@ export function ParagraphReveal({
   once = true,
   threshold = 0.3,
 }: ParagraphRevealProps) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const isInView = useInView(ref, { once, amount: threshold });
-
   return (
     <motion.p
-      ref={ref}
       initial={{ 
         opacity: 0, 
         y: 20,
         filter: "blur(8px)",
       }}
-      animate={isInView ? { 
+      whileInView={{ 
         opacity: 1, 
         y: 0,
         filter: "blur(0px)",
-      } : { 
-        opacity: 0, 
-        y: 20,
-        filter: "blur(8px)",
       }}
+      viewport={{ once, amount: threshold }}
       transition={{
         duration,
         delay,
@@ -210,23 +177,17 @@ export function KickerReveal({
   className = "",
   once = true,
 }: KickerRevealProps) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const isInView = useInView(ref, { once, amount: 0.5 });
-
   return (
     <motion.p
-      ref={ref}
       initial={{ 
         opacity: 0, 
         y: 10,
       }}
-      animate={isInView ? { 
+      whileInView={{ 
         opacity: 1, 
         y: 0,
-      } : { 
-        opacity: 0, 
-        y: 10,
       }}
+      viewport={{ once, amount: 0.5 }}
       transition={{
         duration: 0.6,
         delay,

@@ -3,8 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Check } from "lucide-react";
-import { HeadingReveal, ParagraphReveal, KickerReveal } from "@/components/text-reveal";
-import { StaggerContainer, StaggerItem, InstantFade, FadeInView } from "@/components/stagger-animation";
+import { HeadingReveal, ParagraphReveal } from "@/components/text-reveal";
+import { StaggerContainer, StaggerItem, FadeInView } from "@/components/stagger-animation";
 
 export function Pricing() {
   return (
@@ -24,13 +24,13 @@ export function Pricing() {
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         {/* Cabeçalho com TextReveal */}
         <div className="text-center mb-16">
-          <HeadingReveal
-            text="Investimento transparente e estratégico."
-            as="h2"
-            staggerDelay={0.03}
-            duration={1}
-            className="text-4xl font-bold text-white mb-4"
-          />
+          <h2 className="text-4xl font-bold text-white mb-4">
+            <HeadingReveal
+              text="Investimento transparente e estratégico."
+              staggerDelay={0.03}
+              duration={1}
+            />
+          </h2>
           <ParagraphReveal delay={0.4} className="text-zinc-400">
             Flexibilidade total. Pause quando necessário.
           </ParagraphReveal>

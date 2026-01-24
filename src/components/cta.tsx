@@ -14,13 +14,13 @@ export function CTA() {
       <div className="container px-4 md:px-6 mx-auto relative z-10">
         <div className="text-center">
           {/* Título com TextReveal dramático */}
-          <HeadingReveal
-            text="Pronto para escalar sua engenharia?"
-            as="h2"
-            staggerDelay={0.03}
-            duration={1}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6"
-          />
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6">
+            <HeadingReveal
+              text="Pronto para escalar sua engenharia?"
+              staggerDelay={0.03}
+              duration={1}
+            />
+          </h2>
 
           {/* Subtítulo com ParagraphReveal */}
           <ParagraphReveal

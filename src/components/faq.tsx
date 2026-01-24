@@ -41,13 +41,13 @@ export function FAQ() {
     <section id="faq" className="py-24 bg-zinc-950">
       <div className="container px-4 md:px-6 mx-auto max-w-3xl">
         {/* Cabeçalho com TextReveal */}
-        <HeadingReveal 
-          text="Perguntas Frequentes" 
-          as="h2"
-          staggerDelay={0.04}
-          duration={0.9}
-          className="text-3xl font-bold text-center mb-12 text-white"
-        />
+        <h2 className="text-3xl font-bold text-center mb-12 text-white">
+          <HeadingReveal 
+            text="Perguntas Frequentes" 
+            staggerDelay={0.04}
+            duration={0.9}
+          />
+        </h2>
 
         {/* Accordion com Stagger Pattern */}
         <StaggerContainer

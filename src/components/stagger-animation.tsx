@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, Variants, useInView } from "framer-motion";
-import { useRef, ReactNode, ElementType } from "react";
+import { motion, Variants } from "framer-motion";
+import { ReactNode } from "react";
 
 // Curva de easing cinematográfica (easeOutQuint) - Apple/Dior style
 const CINEMATIC_EASE = [0.22, 1, 0.36, 1] as const;
@@ -22,7 +22,6 @@ interface StaggerContainerProps {
   /** Porcentagem visível para trigger */
   threshold?: number;
   className?: string;
-  as?: ElementType;
 }
 
 export function StaggerContainer({
@@ -32,14 +31,7 @@ export function StaggerContainer({
   once = true,
   threshold = 0.2,
   className = "",
-  as: Component = "div",
 }: StaggerContainerProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, {
-    once,
-    amount: threshold,
-  });
-
   const containerVariants: Variants = {
     hidden: { opacity: 1 },
     visible: {
@@ -51,18 +43,16 @@ export function StaggerContainer({
     },
   };
 
-  const MotionComponent = motion(Component);
-
   return (
-    <MotionComponent
-      ref={containerRef}
+    <motion.div
       variants={containerVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      whileInView="visible"
+      viewport={{ once, amount: threshold }}
       className={className}
     >
       {children}
-    </MotionComponent>
+    </motion.div>
   );
 }
 
@@ -78,7 +68,6 @@ interface StaggerItemProps {
   yOffset?: number;
   /** Duração da animação */
   duration?: number;
-  as?: ElementType;
 }
 
 export function StaggerItem({
@@ -86,7 +75,6 @@ export function StaggerItem({
   className = "",
   yOffset = 20,
   duration = 0.6,
-  as: Component = "div",
 }: StaggerItemProps) {
   const itemVariants: Variants = {
     hidden: { 
@@ -103,16 +91,14 @@ export function StaggerItem({
     },
   };
 
-  const MotionComponent = motion(Component);
-
   return (
-    <MotionComponent
+    <motion.div
       variants={itemVariants}
       className={className}
       style={{ willChange: "transform, opacity" }}
     >
       {children}
-    </MotionComponent>
+    </motion.div>
   );
 }
 
@@ -186,7 +172,6 @@ export function StaggerList({
 // ============================================
 // FADE IN VIEW
 // Fade in simples quando entra na viewport
-// Para elementos que NÃO precisam de stagger
 // ============================================
 
 interface FadeInViewProps {
@@ -198,7 +183,6 @@ interface FadeInViewProps {
   className?: string;
   /** Movimento vertical sutil */
   yOffset?: number;
-  as?: ElementType;
 }
 
 export function FadeInView({
@@ -209,27 +193,18 @@ export function FadeInView({
   threshold = 0.3,
   className = "",
   yOffset = 20,
-  as: Component = "div",
 }: FadeInViewProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once, amount: threshold });
-
-  const MotionComponent = motion(Component);
-
   return (
-    <MotionComponent
-      ref={ref}
+    <motion.div
       initial={{ 
         opacity: 0, 
         y: yOffset,
       }}
-      animate={isInView ? { 
+      whileInView={{ 
         opacity: 1, 
         y: 0,
-      } : { 
-        opacity: 0, 
-        y: yOffset,
       }}
+      viewport={{ once, amount: threshold }}
       transition={{
         duration,
         delay,
@@ -239,7 +214,7 @@ export function FadeInView({
       style={{ willChange: "transform, opacity" }}
     >
       {children}
-    </MotionComponent>
+    </motion.div>
   );
 }
 
@@ -259,16 +234,13 @@ export function InstantFade({
   className = "",
   delay = 0,
 }: InstantFadeProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{
-        duration: 0.3, // Imperceptível mas suave
+        duration: 0.3,
         delay,
         ease: "easeOut",
       }}
