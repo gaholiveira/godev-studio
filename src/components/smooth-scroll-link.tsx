@@ -9,6 +9,7 @@ interface SmoothScrollLinkProps {
   duration?: number;
   offset?: number;
   as?: "a" | "button";
+  onClick?: () => void;
 }
 
 // Tipo para a instância do Lenis (genérico para compatibilidade com diferentes versões)
@@ -52,11 +53,17 @@ export function SmoothScrollLink({
   duration = 1.8,
   offset = -80,
   as = "a",
+  onClick,
 }: SmoothScrollLinkProps) {
   const handleClick = (e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     // IMPORTANTE: preventDefault deve ser a primeira coisa
     e.preventDefault();
     e.stopPropagation();
+
+    // Chama onClick callback se fornecido
+    if (onClick) {
+      onClick();
+    }
 
     // Se não for um hash link, deixar comportamento padrão
     if (!href.startsWith("#")) {
@@ -81,7 +88,9 @@ export function SmoothScrollLink({
 
     // Adicionar blur no body quando o scroll inicia
     if (typeof document !== "undefined") {
-      document.body.classList.add("blur-sm");
+      document.body.classList.add("scroll-blur");
+      // Forçar repaint para garantir que a transição funcione
+      void document.body.offsetHeight;
     }
 
     // Callback para remover blur quando o scroll terminar
@@ -89,7 +98,7 @@ export function SmoothScrollLink({
     const removeBlur = () => {
       if (!blurRemoved && typeof document !== "undefined") {
         blurRemoved = true;
-        document.body.classList.remove("blur-sm");
+        document.body.classList.remove("scroll-blur");
       }
     };
 
@@ -102,26 +111,49 @@ export function SmoothScrollLink({
       let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
       let scrollTimeout: NodeJS.Timeout;
       let isListening = false;
+      let scrollStartTime = Date.now();
 
-      // Função para verificar se o scroll parou (debounce)
+      // Função para verificar se o scroll parou (debounce melhorado)
       const checkScrollStop = () => {
         const currentScrollY = typeof window !== "undefined" ? window.scrollY : 0;
+        const scrollDelta = Math.abs(currentScrollY - lastScrollY);
         
         // Limpar timeout anterior
         clearTimeout(scrollTimeout);
         
         // Se a posição mudou significativamente, o scroll ainda está ativo
-        if (Math.abs(currentScrollY - lastScrollY) > 0.5) {
+        if (scrollDelta > 1) {
           lastScrollY = currentScrollY;
+          scrollStartTime = Date.now();
           // Agendar nova verificação
-          scrollTimeout = setTimeout(checkScrollStop, 50);
+          scrollTimeout = setTimeout(checkScrollStop, 100);
         } else {
-          // Scroll parou, remover blur
-          removeBlur();
-          // Remover listener se disponível
-          if (lenis && typeof lenis.off === "function" && isListening) {
-            lenis.off("scroll", checkScrollStop);
-            isListening = false;
+          // Verificar se passou tempo suficiente desde o último movimento
+          const timeSinceLastMove = Date.now() - scrollStartTime;
+          if (timeSinceLastMove > 200) {
+            // Verificar se o elemento alvo está visível no viewport
+            const rect = targetElement.getBoundingClientRect();
+            const isInViewport = 
+              rect.top >= 0 && 
+              rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.3;
+            
+            if (isInViewport) {
+              // Scroll parou e elemento está visível, remover blur com delay suave
+              setTimeout(() => {
+                removeBlur();
+              }, 300);
+              // Remover listener se disponível
+              if (lenis && typeof lenis.off === "function" && isListening) {
+                lenis.off("scroll", checkScrollStop);
+                isListening = false;
+              }
+            } else {
+              // Ainda não chegou na posição, verificar novamente
+              scrollTimeout = setTimeout(checkScrollStop, 100);
+            }
+          } else {
+            // Ainda pode estar se movendo, verificar novamente
+            scrollTimeout = setTimeout(checkScrollStop, 100);
           }
         }
       };
@@ -160,7 +192,7 @@ export function SmoothScrollLink({
           isListening = false;
         }
         clearTimeout(scrollTimeout);
-      }, duration * 1000 + 300);
+      }, duration * 1000 + 500);
     } else {
       // Fallback para scroll nativo se Lenis não estiver disponível
       const elementPosition =

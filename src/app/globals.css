@@ -44,6 +44,32 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* GoDev Brand Colors - Tech, minimal, crisp borders, zinc/slate palette */
+  --color-godev-primary: #3b82f6; /* Electric Blue */
+  --color-godev-primary-foreground: #ffffff;
+  --color-godev-accent: #60a5fa; /* Lighter Blue */
+  --color-godev-muted: #f4f4f5; /* Zinc 100 */
+  --color-godev-border: #e4e4e7; /* Zinc 200 */
+  --color-godev-foreground: #18181b; /* Zinc 900 */
+
+  /* VIOS Labs Brand Colors - Luxury, Deep Forest Green, Serif fonts */
+  --color-vios-green: #1a3c34; /* Deep Forest */
+  --color-vios-green-foreground: #ffffff;
+  --color-vios-gold: #d4af37; /* Metallic Gold */
+  --color-vios-gold-foreground: #1a3c34;
+  --color-vios-cream: #f5f5dc; /* Off-white/Travertine */
+  --color-vios-cream-foreground: #1a3c34;
+
+  /* Semantic Brand Colors */
+  --color-brand-dark: #09090b; /* Zinc 950 - Background padrão */
+  --color-brand-border: #27272a; /* Zinc 800 - Bordas sutis */
+  --color-tech-glow: #3b82f6; /* Azul elétrico muito sutil para hovers tech */
+  --color-lux-gold: #d4af37; /* Ouro metálico - para detalhes premium */
+  --color-lux-green: #1a3c34; /* Verde profundo Vios */
+
+  /* Background Images */
+  --background-image-noise: url('/textures/noise.svg');
 }
 
 :root {
@@ -137,7 +163,27 @@
   }
   
   body {
-    @apply bg-zinc-950 text-zinc-50 antialiased;
+    @apply bg-zinc-950 text-zinc-300 antialiased;
+  }
+
+  /* Noise Texture Utility */
+  .bg-noise {
+    background-image: url('/textures/noise.svg');
+    background-repeat: repeat;
+  }
+
+  /* Tipografia Global - Parágrafos não devem ser branco puro */
+  p {
+    @apply text-zinc-400;
+  }
+
+  /* Títulos principais com gradiente metálico */
+  h1, h2 {
+    @apply text-zinc-100;
+  }
+
+  h3, h4, h5, h6 {
+    @apply text-zinc-200;
   }
 
   /* Esconder cursor padrão apenas em dispositivos com mouse (pointer: fine) */
@@ -180,4 +226,74 @@
   background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+}
+
+/* Text Gradient Utilities */
+.text-gradient-metallic {
+  @apply bg-clip-text text-transparent bg-gradient-to-b from-white via-zinc-200 to-zinc-500;
+}
+
+.text-gradient-gold {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#d4af37] via-[#f3e5ab] to-[#d4af37];
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Scroll Blur Effect - Efeito de embaçado durante navegação */
+body.scroll-blur {
+  overflow: hidden;
+}
+
+body.scroll-blur main {
+  filter: blur(10px) brightness(0.85);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: filter;
+  opacity: 0.9;
+}
+
+body.scroll-blur header {
+  filter: blur(6px) brightness(0.9);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: filter;
+  opacity: 0.85;
+}
+
+body.scroll-blur footer {
+  filter: blur(6px) brightness(0.9);
+  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: filter;
+  opacity: 0.85;
+}
+
+/* Remover blur suavemente quando a classe é removida */
+body:not(.scroll-blur) main,
+body:not(.scroll-blur) header,
+body:not(.scroll-blur) footer {
+  filter: blur(0) brightness(1);
+  transition: filter 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+  will-change: filter, opacity;
+  opacity: 1;
 }

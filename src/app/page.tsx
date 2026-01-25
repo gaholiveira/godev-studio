@@ -1,36 +1,23 @@
 "use client";
 
-import { Hero } from "@/components/hero";
-import { TechStack } from "@/components/tech-stack";
-import { FeaturedCase } from "@/components/featured-case";
-import { Pricing } from "@/components/pricing";
-import { FAQ } from "@/components/faq";
-import { CTA } from "@/components/cta";
-import { Footer } from "@/components/footer";
-import { useRef } from "react";
-import { useFooterHeight } from "@/hooks/use-footer-height";
+import { Hero } from "@/components/features/home/hero";
+import { TechStack } from "@/components/features/home/tech-stack";
+import { ViosShowcase } from "@/components/features/home/vios-showcase";
+import { BentoGrid } from "@/components/features/home/bento-grid";
+import { Pricing } from "@/components/features/home/pricing";
+import { FAQ } from "@/components/features/home/faq";
+import { CTA } from "@/components/features/home/cta";
 
 export default function Home() {
-  const footerRef = useRef<HTMLElement>(null);
-  const footerHeight = useFooterHeight(footerRef);
-
   return (
-    <>
-      <main 
-        className="relative bg-black"
-        style={{ 
-          zIndex: 10,
-          marginBottom: `${footerHeight}px`
-        }}
-      >
-        <Hero />
-        <TechStack />
-        <FeaturedCase />
-        <Pricing />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer ref={footerRef} />
-    </>
+    <main className="relative bg-black">
+      <Hero />
+      <TechStack />
+      <ViosShowcase />
+      <BentoGrid />
+      <Pricing />
+      <FAQ />
+      <CTA />
+    </main>
   );
 }

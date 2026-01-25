@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { CustomCursor } from "@/components/custom-cursor";
 
@@ -28,12 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="lenis lenis-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-zinc-950 bg-noise text-zinc-300 antialiased`}
       >
         <CustomCursor />
         <SmoothScroll />
-        <Navbar />
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
