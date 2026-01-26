@@ -20,21 +20,12 @@ export function CTA() {
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
-      style={{ willChange: "transform, opacity" }}
       className={cn(
         "relative overflow-hidden",
-        "bg-zinc-950 border-t border-white/10",
-        "py-24 md:py-32",
+        "bg-zinc-950 border-y border-white/5",
+        "py-16 md:py-24",
       )}
     >
-      {/* Gradiente radial sutil no centro */}
-      <div
-        className={cn("absolute inset-0 pointer-events-none")}
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(39, 39, 42, 0.3) 0%, rgba(24, 24, 27, 1) 70%, rgba(24, 24, 27, 1) 100%)",
-        }}
-      />
 
       {/* Conteúdo */}
       <div
@@ -62,9 +53,9 @@ export function CTA() {
             <Badge
               variant="outline"
               className={cn(
-                "rounded-full border-[#d4af37]/30 bg-[#d4af37]/10",
+                "rounded-full border-zinc-700 bg-zinc-800/50",
                 "px-4 py-1.5 text-xs md:text-sm",
-                "text-[#d4af37] backdrop-blur-sm",
+                "text-zinc-300 backdrop-blur-sm",
                 "font-medium flex items-center gap-2",
               )}
             >
@@ -149,12 +140,12 @@ export function CTA() {
           {/* Social Proof Sutil */}
           <div className="relative z-10 mt-8 flex items-center justify-center gap-6 text-sm text-zinc-500">
             <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
               <span>Disponível agora</span>
             </div>
             <div className="h-4 w-px bg-zinc-800" />
             <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+              <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
               <span>Sem compromisso</span>
             </div>
           </div>

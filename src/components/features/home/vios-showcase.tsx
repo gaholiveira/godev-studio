@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,16 +11,37 @@ import { cn } from "@/lib/utils";
 
 export function ViosShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Parallax suave na imagem
+  // Garantir que o componente está montado no cliente antes de aplicar transforms
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Parallax suave na imagem - reduzido no mobile para melhor performance
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1.0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 0.7]);
+  // Reduzir animações no mobile e para usuários que preferem menos movimento
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    prefersReducedMotion ? ["0%", "0%"] : ["0%", "10%"]
+  );
+  // Remover scale no mobile para evitar mudanças de tamanho
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    prefersReducedMotion ? [1, 1] : [1, 1]
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    prefersReducedMotion ? [1, 1, 1] : [1, 1, 1]
+  );
   return (
     <motion.section
       ref={containerRef}
@@ -31,7 +52,6 @@ export function ViosShowcase() {
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
-      style={{ willChange: "transform, opacity" }}
       className={cn(
         "relative overflow-hidden",
         "border-y border-white/5 bg-zinc-900/20"
@@ -144,9 +164,14 @@ export function ViosShowcase() {
             className={cn(
               "relative",
               "flex items-center justify-center",
-              "min-h-[400px] lg:min-h-[600px]",
-              "bg-black"
+              "h-[400px] md:h-[500px] lg:h-[600px]",
+              "bg-black",
+              "overflow-hidden"
             )}
+            style={{
+              contain: "layout style paint",
+              minHeight: "400px",
+            }}
           >
             {/* Atmosphere Effect - Blur verde */}
             <div
@@ -161,32 +186,52 @@ export function ViosShowcase() {
 
             {/* Image Container - Parallax Effect */}
             <motion.div
-              style={{ 
+              initial={{ 
+                opacity: 1, 
+                y: "0%", 
+                scale: 1 
+              }}
+              style={isMounted ? { 
                 y, 
                 scale, 
                 opacity,
-                willChange: "transform, opacity"
+              } : {
+                opacity: 1,
+                y: "0%",
+                scale: 1,
               }}
               className={cn(
                 "relative z-10",
-                "w-full h-full",
-                "flex items-center justify-center"
+                "w-full",
+                "flex items-center justify-center",
+                "px-4 md:px-0",
+                "backface-hidden",
+                "transform-gpu"
               )}
             >
-              <Image
-                src="/Images/vios-laptop.png"
-                alt="Vios Labs - E-commerce de Pharmaceutical Luxury"
-                width={1200}
-                height={800}
+              <div
                 className={cn(
-                  "object-contain",
-                  "w-full h-auto",
-                  "max-w-full max-h-[600px]",
-                  "drop-shadow-2xl"
+                  "relative",
+                  "w-full h-full",
+                  "max-w-[90vw] md:max-w-full",
+                  "flex items-center justify-center"
                 )}
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+              >
+                <Image
+                  src="/Images/vios-laptop.png"
+                  alt="Vios Labs - E-commerce de Pharmaceutical Luxury"
+                  width={1200}
+                  height={800}
+                  className={cn(
+                    "object-contain",
+                    "w-auto h-full",
+                    "max-w-full",
+                    "drop-shadow-2xl"
+                  )}
+                  priority
+                  sizes="(max-width: 768px) 90vw, 50vw"
+                />
+              </div>
             </motion.div>
           </div>
         </div>

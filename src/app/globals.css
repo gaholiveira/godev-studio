@@ -216,6 +216,28 @@
     transform: scale(0.95);
     transition: transform 0.1s ease-out;
   }
+
+  /* Otimizações para WebViews (Instagram, Facebook, etc.) */
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  /* Prevenir mudanças de tamanho durante scroll em WebViews */
+  @media (max-width: 768px) {
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
 }
 
 /* Grid Pattern Background */
