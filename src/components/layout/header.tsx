@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SmoothScrollLink } from "@/components/smooth-scroll-link";
 import { cn } from "@/lib/utils";
@@ -103,6 +103,18 @@ export function Header() {
             >
               Tech Stack
             </SmoothScrollLink>
+            <Link
+              href="/vios"
+              className={cn(
+                "text-zinc-400 hover:text-white",
+                "transition-colors",
+                "flex items-center gap-1.5",
+                "relative group"
+              )}
+            >
+              <Sparkles className="h-3.5 w-3.5 text-[#d4af37]/60 group-hover:text-[#d4af37] transition-colors" />
+              <span>Showcase</span>
+            </Link>
           </nav>
 
           {/* Direita - Desktop: Botão | Mobile: Menu Icon */}
@@ -244,9 +256,10 @@ export function Header() {
                   className="space-y-1 w-full max-w-xs"
                 >
                   {[
-                    { href: "#servicos", label: "Serviços" },
-                    { href: "#planos", label: "Planos" },
-                    { href: "#tech-stack", label: "Tech Stack" },
+                    { href: "#servicos", label: "Serviços", isLink: false },
+                    { href: "#planos", label: "Planos", isLink: false },
+                    { href: "#tech-stack", label: "Tech Stack", isLink: false },
+                    { href: "/vios", label: "Showcase", isLink: true },
                   ].map((item, index) => (
                     <motion.div
                       key={item.href}
@@ -265,22 +278,43 @@ export function Header() {
                         },
                       }}
                     >
-                      <SmoothScrollLink
-                        href={item.href}
-                        onClick={closeMobileMenu}
-                        className={cn(
-                          "block",
-                          "text-base font-medium",
-                          "text-zinc-400 hover:text-white",
-                          "px-4 py-3 rounded-lg",
-                          "text-center",
-                          "hover:bg-zinc-900/50",
-                          "transition-colors duration-200",
-                          "focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-zinc-950",
-                        )}
-                      >
-                        {item.label}
-                      </SmoothScrollLink>
+                      {item.isLink ? (
+                        <Link
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          className={cn(
+                            "block",
+                            "text-base font-medium",
+                            "text-zinc-400 hover:text-white",
+                            "px-4 py-3 rounded-lg",
+                            "text-center",
+                            "hover:bg-zinc-900/50",
+                            "transition-colors duration-200",
+                            "focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-zinc-950",
+                            "flex items-center justify-center gap-1.5"
+                          )}
+                        >
+                          <Sparkles className="h-3.5 w-3.5 text-[#d4af37]/60" />
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <SmoothScrollLink
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          className={cn(
+                            "block",
+                            "text-base font-medium",
+                            "text-zinc-400 hover:text-white",
+                            "px-4 py-3 rounded-lg",
+                            "text-center",
+                            "hover:bg-zinc-900/50",
+                            "transition-colors duration-200",
+                            "focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-zinc-950",
+                          )}
+                        >
+                          {item.label}
+                        </SmoothScrollLink>
+                      )}
                     </motion.div>
                   ))}
                 </motion.div>

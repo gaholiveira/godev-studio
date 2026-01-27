@@ -2,7 +2,8 @@
 
 import { motion, Variants } from "framer-motion";
 import { useRef } from "react";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MaskedTextReveal } from "@/components/ui/masked-text-reveal";
@@ -140,7 +141,7 @@ function PricingCard({
       </div>
 
       {/* Features List */}
-      <ul className="flex-1 space-y-4 mb-8">
+      <ul className="flex-1 space-y-4 mb-6">
         {features.map((feature, index) => (
           <li key={index} className="flex items-start gap-3">
             <Check
@@ -152,6 +153,26 @@ function PricingCard({
           </li>
         ))}
       </ul>
+
+      {/* Link para Case Vios (apenas no Enterprise) */}
+      {title === "Enterprise" && (
+        <div className="mb-6">
+          <Link
+            href="/vios"
+            className={cn(
+              "text-xs md:text-sm",
+              "text-[#d4af37] hover:text-[#f3e5ab]",
+              "underline-offset-4 hover:underline",
+              "transition-colors duration-200",
+              "flex items-center gap-1",
+              "group"
+            )}
+          >
+            <span>Conheça nosso padrão de entrega Enterprise (Case VIOS)</span>
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      )}
 
       {/* Button */}
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>

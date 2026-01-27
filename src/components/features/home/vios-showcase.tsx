@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MaskedTextReveal } from "@/components/ui/masked-text-reveal";
@@ -42,6 +43,8 @@ export function ViosShowcase() {
     [0, 0.5, 1],
     prefersReducedMotion ? [1, 1, 1] : [1, 1, 1]
   );
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.section
       ref={containerRef}
@@ -54,19 +57,42 @@ export function ViosShowcase() {
       }}
       className={cn(
         "relative overflow-hidden",
-        "border-y border-white/5 bg-zinc-900/20"
+        "border-y border-white/5 bg-zinc-900/20",
+        "group cursor-pointer"
       )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className={cn("max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24")}>
+        {/* Overlay com texto "Ver Projeto" no hover */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          className={cn(
+            "absolute inset-0 z-50",
+            "flex items-center justify-center",
+            "bg-black/40 backdrop-blur-sm",
+            "pointer-events-none"
+          )}
+        >
+          <span className="text-2xl font-semibold text-white">
+            Ver Projeto
+          </span>
+        </motion.div>
+
         {/* Grid Layout */}
         <div
           className={cn(
             "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12",
-            "items-center"
+            "items-center",
+            "transition-opacity duration-300",
+            isHovered && "opacity-90"
           )}
         >
           {/* Left: Copy & Contexto */}
-          <div className={cn("flex flex-col justify-center space-y-6")}>
+          <Link href="/vios" className="block">
+            <div className={cn("flex flex-col justify-center space-y-6")}>
             {/* Eyebrow */}
             <p
               className={cn(
@@ -148,31 +174,27 @@ export function ViosShowcase() {
                 )}
                 asChild
               >
-                <a
-                  href="https://vioslabs.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explorar Case
-                </a>
+                <span>Explorar Case</span>
               </Button>
             </motion.div>
-          </div>
+            </div>
+          </Link>
 
           {/* Right: Visual */}
-          <div
-            className={cn(
-              "relative",
-              "flex items-center justify-center",
-              "h-[400px] md:h-[500px] lg:h-[600px]",
-              "bg-black",
-              "overflow-hidden"
-            )}
-            style={{
-              contain: "layout style paint",
-              minHeight: "400px",
-            }}
-          >
+          <Link href="/vios" className="block h-full">
+            <div
+              className={cn(
+                "relative",
+                "flex items-center justify-center",
+                "h-[400px] md:h-[500px] lg:h-[600px]",
+                "bg-black",
+                "overflow-hidden"
+              )}
+              style={{
+                contain: "layout style paint",
+                minHeight: "400px",
+              }}
+            >
             {/* Atmosphere Effect - Blur verde */}
             <div
               className={cn(
@@ -233,7 +255,8 @@ export function ViosShowcase() {
                 />
               </div>
             </motion.div>
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
     </motion.section>
