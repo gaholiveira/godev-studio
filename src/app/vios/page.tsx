@@ -51,40 +51,45 @@ export default function ViosCaseStudy() {
       {/* Botão flutuante "Voltar para Studio" */}
       <ViosScrollReveal delay={0.2}>
         <motion.div
-          className="fixed top-8 left-8 z-50"
+          className="fixed top-4 left-4 md:top-8 md:left-8 z-50"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Button
             variant="ghost"
+            size="sm"
             className={cn(
               "backdrop-blur-md bg-white/5 border border-[#D4AF37]/20",
               "text-[#F5F5DC] hover:text-[#D4AF37]",
               "hover:bg-white/10 hover:border-[#D4AF37]/40",
-              "transition-all duration-300"
+              "transition-all duration-300",
+              "text-xs md:text-sm",
+              "px-3 md:px-4 py-2",
+              "min-h-[44px]"
             )}
             asChild
           >
-            <Link href="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Voltar para Studio
+            <Link href="/" className="flex items-center gap-1.5 md:gap-2">
+              <ArrowLeft className="h-3.5 w-3.5 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">Voltar para Studio</span>
+              <span className="sm:hidden">Voltar</span>
             </Link>
           </Button>
         </motion.div>
       </ViosScrollReveal>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-32">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Lado Esquerdo: Texto */}
             <ViosScrollReveal delay={0.1}>
-              <div className="space-y-10 lg:space-y-12">
+              <div className="space-y-6 md:space-y-10 lg:space-y-12">
                 <h1
                   className={cn(
-                    "text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
-                    "text-[#D4AF37] mb-6",
+                    "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
+                    "text-[#D4AF37] mb-4 md:mb-6",
                     "leading-tight tracking-tight",
                     "font-[var(--font-playfair)]"
                   )}
@@ -97,7 +102,7 @@ export default function ViosCaseStudy() {
                 <TextRevealBlur delay={0.4} className="block">
                   <p
                     className={cn(
-                      "text-lg md:text-xl lg:text-2xl",
+                      "text-base sm:text-lg md:text-xl lg:text-2xl",
                       "text-[#F5F5DC]/90",
                       "leading-relaxed",
                       "max-w-xl"
@@ -112,14 +117,14 @@ export default function ViosCaseStudy() {
 
             {/* Lado Direito: Visual */}
             <ViosScrollReveal delay={0.3}>
-              <div className="relative w-full flex items-center justify-center">
+              <div className="relative w-full flex items-center justify-center mt-8 lg:mt-0">
                 <div
                   className={cn(
                     "relative",
-                    "w-full"
+                    "w-full max-w-md lg:max-w-full"
                   )}
                   style={{
-                    filter: "drop-shadow(0 25px 50px rgba(212, 175, 55, 0.3)) drop-shadow(0 10px 20px rgba(212, 175, 55, 0.2))",
+                    filter: "drop-shadow(0 15px 30px rgba(212, 175, 55, 0.25)) drop-shadow(0 5px 15px rgba(212, 175, 55, 0.15))",
                   }}
                 >
                   <Image
@@ -132,7 +137,7 @@ export default function ViosCaseStudy() {
                       "object-contain"
                     )}
                     priority
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 50vw"
                   />
                 </div>
               </div>
@@ -142,15 +147,15 @@ export default function ViosCaseStudy() {
       </section>
 
       {/* Seção "O Desafio" */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Esquerda: Texto */}
             <ViosScrollReveal delay={0.2}>
               <div>
                 <h2
                   className={cn(
-                    "text-4xl md:text-5xl font-serif mb-6",
+                    "text-3xl sm:text-4xl md:text-5xl font-serif mb-4 md:mb-6",
                     "text-[#F5F5DC]",
                     "font-[var(--font-playfair)]"
                   )}
@@ -162,8 +167,8 @@ export default function ViosCaseStudy() {
                 <TextRevealBlur delay={0.3} className="block">
                   <p
                     className={cn(
-                      "text-lg md:text-xl text-[#F5F5DC]/80",
-                      "leading-relaxed mb-4"
+                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
+                      "leading-relaxed mb-3 md:mb-4"
                     )}
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
@@ -175,7 +180,7 @@ export default function ViosCaseStudy() {
                   </p>
                   <p
                     className={cn(
-                      "text-lg md:text-xl text-[#F5F5DC]/80",
+                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
                       "leading-relaxed"
                     )}
                     style={{ fontFamily: "Inter, sans-serif" }}
@@ -195,7 +200,7 @@ export default function ViosCaseStudy() {
                   "relative",
                   "bg-white/5 backdrop-blur-xl",
                   "border border-[#D4AF37]/20 rounded-2xl",
-                  "p-8 md:p-10",
+                  "p-6 md:p-8 lg:p-10",
                   "shadow-2xl shadow-black/50"
                 )}
               >
@@ -237,9 +242,9 @@ export default function ViosCaseStudy() {
                     <div className="flex-1">
                       <div
                         className="h-20 rounded-lg mb-2"
-                        style={{ backgroundColor: "#F3E5AB" }}
+                        style={{ backgroundColor: "#F2F2F0" }}
                       />
-                      <p className="text-xs text-[#F5F5DC]/50">Champagne</p>
+                      <p className="text-xs text-[#F5F5DC]/50">Off White</p>
                     </div>
                   </div>
                 </div>
@@ -248,38 +253,104 @@ export default function ViosCaseStudy() {
                 <div>
                   <p
                     className={cn(
-                      "text-sm text-[#F5F5DC]/60 mb-4",
-                      "font-[var(--font-inter)]"
+                      "text-sm text-[#F5F5DC]/60 mb-5",
+                      "font-[var(--font-inter)]",
+                      "uppercase tracking-wider"
                     )}
                   >
                     Tipografia
                   </p>
-                  <div className="space-y-3">
-                    <div>
-                      <p
-                        className={cn(
-                          "text-3xl font-serif text-[#F3E5AB]",
-                          "font-[var(--font-playfair)]"
-                        )}
-                      >
-                        Playfair Display
-                      </p>
-                      <p className="text-xs text-[#F5F5DC]/50 mt-1">
-                        Títulos e Headings
-                      </p>
+                  <div className="space-y-5">
+                    {/* Playfair Display */}
+                    <div
+                      className={cn(
+                        "relative",
+                        "bg-white/3 rounded-lg",
+                        "border border-[#D4AF37]/10",
+                        "p-4"
+                      )}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <p
+                            className={cn(
+                              "text-2xl md:text-3xl font-serif text-[#D4AF37] mb-1",
+                              "font-[var(--font-playfair)]"
+                            )}
+                          >
+                            Playfair Display
+                          </p>
+                          <p className="text-xs text-[#F5F5DC]/50">
+                            Títulos e Headings
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-[#D4AF37]/10">
+                        <p
+                          className={cn(
+                            "text-lg md:text-xl text-[#F5F5DC]",
+                            "font-[var(--font-playfair)]",
+                            "leading-tight"
+                          )}
+                        >
+                          Aa Bb Cc
+                        </p>
+                        <p
+                          className={cn(
+                            "text-sm text-[#F5F5DC]/70 mt-2",
+                            "font-[var(--font-playfair)]"
+                          )}
+                        >
+                          Elegância & Precisão
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p
-                        className={cn(
-                          "text-lg text-[#F5F5DC]/80",
-                          "font-[var(--font-inter)]"
-                        )}
-                      >
-                        Inter
-                      </p>
-                      <p className="text-xs text-[#F5F5DC]/50 mt-1">
-                        Corpo de Texto
-                      </p>
+
+                    {/* Inter */}
+                    <div
+                      className={cn(
+                        "relative",
+                        "bg-white/3 rounded-lg",
+                        "border border-[#D4AF37]/10",
+                        "p-4"
+                      )}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <p
+                            className={cn(
+                              "text-lg md:text-xl text-[#F5F5DC] mb-1",
+                              "font-[var(--font-inter)]",
+                              "font-semibold"
+                            )}
+                          >
+                            Inter
+                          </p>
+                          <p className="text-xs text-[#F5F5DC]/50">
+                            Corpo de Texto
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-[#D4AF37]/10">
+                        <p
+                          className={cn(
+                            "text-sm md:text-base text-[#F5F5DC]/90",
+                            "font-[var(--font-inter)]",
+                            "leading-relaxed"
+                          )}
+                        >
+                          Aa Bb Cc Dd Ee Ff
+                        </p>
+                        <p
+                          className={cn(
+                            "text-xs md:text-sm text-[#F5F5DC]/70 mt-2",
+                            "font-[var(--font-inter)]",
+                            "leading-relaxed"
+                          )}
+                        >
+                          Legibilidade e clareza para conteúdos extensos.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -290,13 +361,13 @@ export default function ViosCaseStudy() {
       </section>
 
       {/* Seção "Diferenciais Técnicos" - 4 Blocos */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <ViosScrollReveal delay={0.1}>
             <h2
               className={cn(
-                "text-4xl md:text-5xl font-serif mb-16 text-center",
-                "text-[#F3E5AB]"
+                "text-3xl sm:text-4xl md:text-5xl font-serif mb-8 md:mb-12 lg:mb-16 text-center",
+                "text-[#F5F5DC]"
               )}
               style={{ fontFamily: "Playfair Display, serif" }}
             >
@@ -306,7 +377,7 @@ export default function ViosCaseStudy() {
             </h2>
           </ViosScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6 lg:gap-8">
             {/* Linha 1: Card 1 (2 cols) + Card 2 (1 col) */}
             {/* Bloco 01: E-commerce Headless - Destaque (2 colunas, linha 1) */}
             <ViosScrollReveal delay={0.2}>
@@ -328,14 +399,14 @@ export default function ViosCaseStudy() {
                 <div className="relative z-10">
                   <h3
                     className={cn(
-                      "text-2xl md:text-3xl font-serif text-[#D4AF37] mb-4"
+                      "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37] mb-3 md:mb-4"
                     )}
                     style={{ fontFamily: "Playfair Display, serif" }}
                   >
                     E-commerce Headless
                   </h3>
                   <p
-                    className="text-base md:text-lg text-[#F5F5DC]/80 mb-6 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Desenvolvimento focado em performance extrema e design de alta fidelidade.
@@ -397,16 +468,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
                       )}
                       style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       Stripe Connect
                     </h3>
-                    <Shield className="h-6 w-6 text-[#D4AF37]" />
+                    <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-base md:text-lg text-[#F5F5DC]/80 mb-6 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Fluxo de checkout otimizado com Apple Pay e Google Pay integrado.
@@ -480,16 +551,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
                       )}
                       style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       SEO & Performance
                     </h3>
-                    <TrendingUp className="h-6 w-6 text-[#D4AF37]" />
+                    <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-base md:text-lg text-[#F5F5DC]/80 mb-6 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Lighthouse Score 100/100. Rankeamento orgânico priorizado pela arquitetura Next.js.
@@ -571,16 +642,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
                       )}
                       style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       Mobile First
                     </h3>
-                    <Smartphone className="h-6 w-6 text-[#D4AF37]" />
+                    <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-base md:text-lg text-[#F5F5DC]/80 mb-6 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Experiência de compra fluida em qualquer dispositivo, simulando apps nativos.
@@ -630,13 +701,13 @@ export default function ViosCaseStudy() {
       </section>
 
       {/* Seção "Stack de Performance" */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <ViosScrollReveal delay={0.1}>
             <h2
               className={cn(
-                "text-4xl md:text-5xl font-serif mb-16 text-center",
-                "text-[#F3E5AB]"
+                "text-3xl sm:text-4xl md:text-5xl font-serif mb-8 md:mb-12 lg:mb-16 text-center",
+                "text-[#F5F5DC]"
               )}
               style={{ fontFamily: "Playfair Display, serif" }}
             >
@@ -646,7 +717,7 @@ export default function ViosCaseStudy() {
             </h2>
           </ViosScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
               {
                 icon: Zap,
@@ -692,7 +763,7 @@ export default function ViosCaseStudy() {
                   </div>
                   <h3
                     className={cn(
-                      "text-xl font-serif text-[#F3E5AB] mb-1",
+                      "text-lg sm:text-xl font-serif text-[#F5F5DC] mb-1",
                       "font-[var(--font-playfair)]"
                     )}
                   >
@@ -700,7 +771,7 @@ export default function ViosCaseStudy() {
                   </h3>
                   <p
                     className={cn(
-                      "text-sm text-[#F5F5DC]/60",
+                      "text-xs sm:text-sm text-[#F5F5DC]/60",
                       "font-[var(--font-inter)]"
                     )}
                   >
@@ -714,13 +785,13 @@ export default function ViosCaseStudy() {
       </section>
 
       {/* CTA Final */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <ViosScrollReveal delay={0.2}>
             <h2
               className={cn(
-                "text-4xl md:text-5xl font-serif mb-8",
-                "text-[#F3E5AB]"
+                "text-3xl sm:text-4xl md:text-5xl font-serif mb-6 md:mb-8",
+                "text-[#F5F5DC]"
               )}
               style={{ fontFamily: "Playfair Display, serif" }}
             >
@@ -731,11 +802,11 @@ export default function ViosCaseStudy() {
           </ViosScrollReveal>
 
             <ViosScrollReveal delay={0.4}>
-            <TextRevealBlur delay={0.3} className="block mb-12">
+            <TextRevealBlur delay={0.3} className="block mb-8 md:mb-12">
               <p
                 className={cn(
-                  "text-lg md:text-xl text-[#F5F5DC]/80",
-                  "leading-relaxed max-w-2xl mx-auto"
+                  "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
+                  "leading-relaxed max-w-2xl mx-auto px-4"
                 )}
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
@@ -750,11 +821,13 @@ export default function ViosCaseStudy() {
             <Button
               size="lg"
               className={cn(
-                "h-14 px-10 text-lg font-semibold",
+                "h-12 md:h-14 px-6 md:px-10 text-base md:text-lg font-semibold",
                 "bg-[#D4AF37] text-[#0B1E19]",
                 "hover:bg-[#F3E5AB]",
                 "transition-all duration-300",
-                "shadow-xl hover:shadow-2xl hover:shadow-[#D4AF37]/30"
+                "shadow-xl hover:shadow-2xl hover:shadow-[#D4AF37]/30",
+                "min-w-[200px]",
+                "w-full sm:w-auto"
               )}
               asChild
             >
