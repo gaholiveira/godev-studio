@@ -24,6 +24,7 @@ export function CTA() {
         "relative overflow-hidden",
         "bg-zinc-950 border-y border-white/5",
         "py-16 md:py-24",
+        "content-visibility-auto contain-layout",
       )}
     >
 

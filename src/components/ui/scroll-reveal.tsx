@@ -25,7 +25,6 @@ export function ScrollReveal({
         delay,
         ease: [0.22, 1, 0.36, 1], // Curva mais suave e responsiva
       }}
-      style={{ willChange: "transform, opacity" }}
       className={cn(className)}
     >
       {children}

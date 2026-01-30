@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,13 @@ import { SmoothScrollLink } from "@/components/smooth-scroll-link";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
+
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -207,6 +212,7 @@ export function Header() {
 
             {/* Menu Container */}
             <motion.div
+              ref={menuPanelRef}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -223,17 +229,7 @@ export function Header() {
                 "overflow-y-auto",
               )}
               style={{ willChange: "transform, opacity" }}
-              onAnimationComplete={() => {
-                // Remove willChange após animação
-                if (!isMobileMenuOpen) {
-                  const element = document.querySelector(
-                    '[style*="will-change"]',
-                  ) as HTMLElement;
-                  if (element) {
-                    element.style.willChange = "auto";
-                  }
-                }
-              }}
+              onAnimationComplete={() => clearWillChange(menuPanelRef.current)}
             >
               <nav
                 className={cn("flex flex-col items-center", "px-4 py-6")}

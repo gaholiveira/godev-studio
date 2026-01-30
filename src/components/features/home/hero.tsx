@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,19 +12,66 @@ import { cn } from "@/lib/utils";
 
 const titleLines = ["Software de Alta Performance.", "Sem burocracia."];
 
-export function Hero() {
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
+
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = () => setReduced(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+}
+
+export interface HeroProps {
+  /** Caminho da imagem de fundo do hero (ex: /Images/hero.png). Opcional. */
+  imageSrc?: string;
+  /** Texto alternativo para acessibilidade (imagem decorativa: use "" para pular leitura) */
+  imageAlt?: string;
+}
+
+export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+
   return (
     <section
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center",
         "bg-zinc-950 px-4 py-20 md:py-32",
         "overflow-hidden",
+        "contain-layout",
       )}
+      aria-label="Hero"
     >
+      {/* Imagem de fundo (opcional) — LCP, eager load, decorative alt */}
+      {imageSrc && (
+        <div className="absolute inset-0 z-0 img-scroll-contain touch-no-zoom" aria-hidden>
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, (max-width: 1920px) 100vw, 1920px"
+            quality={80}
+            className="object-cover object-center blur-[2px]"
+            draggable={false}
+          />
+          <div className="absolute inset-0 bg-zinc-950/70" aria-hidden />
+        </div>
+      )}
+
       {/* Grid Pattern Background */}
       <div
         className={cn(
-          "absolute inset-0 pointer-events-none",
+          "absolute inset-0 pointer-events-none z-[1]",
           "bg-grid-pattern opacity-[0.03]",
         )}
       />
@@ -30,14 +79,13 @@ export function Hero() {
       {/* Ambient Glow */}
       <div
         className={cn(
-          "absolute top-0 left-1/2 -translate-x-1/2",
+          "absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-[1]",
           "w-[500px] h-[500px]",
           "bg-white/3 blur-[100px] rounded-full",
-          "pointer-events-none",
         )}
       />
 
-      {/* Content Container */}
+      {/* Content Container - texto centralizado como antes */}
       <div
         className={cn(
           "relative z-10 flex flex-col items-center justify-center",
@@ -47,10 +95,12 @@ export function Hero() {
       >
         {/* Badge - Aparece primeiro */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          ref={badgeRef}
+          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          style={{ willChange: "transform, opacity" }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
+          onAnimationComplete={() => clearWillChange(badgeRef.current)}
+          style={{ willChange: reducedMotion ? "auto" : "transform, opacity" }}
         >
           <Badge
             variant="outline"
@@ -77,9 +127,12 @@ export function Hero() {
           {titleLines.map((line, index) => (
             <MaskedTextReveal
               key={index}
-              delay={0.15 + index * 0.08}
+              delay={reducedMotion ? 0 : 0.15 + index * 0.08}
               priority
-              className="block"
+              className={cn(
+                "block",
+                index === 1 && "text-gradient-metallic",
+              )}
             >
               {line}
             </MaskedTextReveal>
@@ -88,7 +141,7 @@ export function Hero() {
 
         {/* Subheadline - Aparece depois do título com blur */}
         <TextRevealBlur
-          delay={0.5}
+          delay={reducedMotion ? 0 : 0.5}
           priority
           className={cn(
             "text-base md:text-lg lg:text-xl",
@@ -103,10 +156,12 @@ export function Hero() {
 
         {/* CTA Buttons - Aparecem por último */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          ref={ctaRef}
+          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-          style={{ willChange: "transform, opacity" }}
+          transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.65 }}
+          onAnimationComplete={() => clearWillChange(ctaRef.current)}
+          style={{ willChange: reducedMotion ? "auto" : "transform, opacity" }}
           className={cn(
             "flex flex-col sm:flex-row gap-4 md:gap-6",
             "items-center justify-center",

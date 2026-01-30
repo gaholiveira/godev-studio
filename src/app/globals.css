@@ -228,7 +228,6 @@
   .transform-gpu {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
-    will-change: transform;
   }
 
   /* Prevenir mudanças de tamanho durante scroll em WebViews */
@@ -237,6 +236,64 @@
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
     }
+  }
+
+  /* Instagram / in-app browser: evitar zoom e bounce ao subir/descer */
+  @supports (touch-action: manipulation) {
+    html,
+    body {
+      touch-action: manipulation;
+    }
+  }
+  body {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Imagens: não disparar zoom ao rolar (evita “input” comum com imagens no Instagram) */
+  img,
+  picture,
+  [data-next-image],
+  .touch-no-zoom {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+  }
+  /* Contêiner de imagem em scroll: evitar reflow/layout shift */
+  .img-scroll-contain {
+    contain: layout style paint;
+  }
+}
+
+/* Performance: content-visibility e contain para seções abaixo da dobra */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
+
+.contain-layout {
+  contain: layout style;
+}
+
+/* Animação leve para botão Vios (apenas opacity + transform) */
+.vios-btn-reveal {
+  animation: vios-fade-slide 0.5s ease-out forwards;
+}
+
+@keyframes vios-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vios-btn-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -289,7 +346,6 @@ body.scroll-blur main {
   filter: blur(10px) brightness(0.85);
   transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
-  will-change: filter;
   opacity: 0.9;
 }
 
@@ -297,7 +353,6 @@ body.scroll-blur header {
   filter: blur(6px) brightness(0.9);
   transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
-  will-change: filter;
   opacity: 0.85;
 }
 
@@ -305,7 +360,6 @@ body.scroll-blur footer {
   filter: blur(6px) brightness(0.9);
   transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
-  will-change: filter;
   opacity: 0.85;
 }
 
@@ -316,6 +370,5 @@ body:not(.scroll-blur) footer {
   filter: blur(0) brightness(1);
   transition: filter 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
-  will-change: filter, opacity;
   opacity: 1;
 }

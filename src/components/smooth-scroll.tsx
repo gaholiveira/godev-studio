@@ -1,39 +1,45 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { setLenisInstance } from "@/components/smooth-scroll-link";
 
+/** Detecta se é dispositivo touch (mobile) — Lenis mais leve nesses dispositivos */
+function isTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
 export function SmoothScroll() {
+  const rafId = useRef<number>(0);
+
   useEffect(() => {
-    // Adicionar classe lenis ao html
     const html = document.documentElement;
     html.classList.add("lenis", "lenis-smooth");
 
-    // Inicializar Lenis
+    const touch = isTouchDevice();
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: touch ? 0.6 : 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: touch ? 0.8 : 1,
       infinite: false,
+      touchMultiplier: 1.2,
     });
 
-    // Registrar a instância globalmente para uso no SmoothScrollLink
     setLenisInstance(lenis);
 
-    // Função de animação
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId.current = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId.current = requestAnimationFrame(raf);
 
-    // Cleanup
     return () => {
+      cancelAnimationFrame(rafId.current);
       lenis.destroy();
       setLenisInstance(null);
       html.classList.remove("lenis", "lenis-smooth");

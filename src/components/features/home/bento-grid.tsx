@@ -108,12 +108,20 @@ function BentoCard({
   );
 }
 
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
+
 export function BentoGrid() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section id="servicos" className="py-16 md:py-24 bg-zinc-950">
+    <section id="servicos" className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <motion.h2
+          ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -121,6 +129,7 @@ export function BentoGrid() {
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
+          onAnimationComplete={() => clearWillChange(titleRef.current)}
           style={{ willChange: "transform, opacity" }}
           className={cn(
             "text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12 md:mb-16",
@@ -134,6 +143,7 @@ export function BentoGrid() {
 
         {/* Bento Grid */}
         <motion.div
+          ref={gridRef}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1, margin: "-50px" }}
@@ -147,6 +157,7 @@ export function BentoGrid() {
               },
             },
           }}
+          onAnimationComplete={() => clearWillChange(gridRef.current)}
           className={cn(
             "grid grid-cols-1 md:grid-cols-3 gap-4",
             "auto-rows-auto",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -10,40 +11,40 @@ interface TextRevealBlurProps {
   priority?: boolean;
 }
 
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
+
 export function TextRevealBlur({
   children,
   className,
   delay = 0,
   priority = false,
 }: TextRevealBlurProps) {
-  // Animação de construção para textos menores: blur inicial que vai se limpando
-  // Efeito de "foco" gradual
-  
+  const ref = useRef<HTMLSpanElement>(null);
+
   if (priority) {
     return (
       <motion.span
-        initial={{ 
+        ref={ref}
+        initial={{
           filter: "blur(10px)",
           opacity: 0,
           y: 10,
         }}
-        animate={{ 
+        animate={{
           filter: "blur(0px)",
           opacity: 1,
           y: 0,
         }}
         transition={{
           duration: 0.8,
-          delay: delay,
+          delay,
           ease: [0.22, 1, 0.36, 1],
         }}
-        onAnimationComplete={() => {
-          // Remove willChange após animação para evitar conflitos
-        }}
+        onAnimationComplete={() => clearWillChange(ref.current)}
         className={cn("inline-block", className)}
-        style={{ 
-          willChange: "filter, opacity, transform",
-        }}
+        style={{ willChange: "filter, opacity, transform" }}
       >
         {children}
       </motion.span>
@@ -52,12 +53,13 @@ export function TextRevealBlur({
 
   return (
     <motion.span
-      initial={{ 
+      ref={ref}
+      initial={{
         filter: "blur(10px)",
         opacity: 0,
         y: 10,
       }}
-      whileInView={{ 
+      whileInView={{
         filter: "blur(0px)",
         opacity: 1,
         y: 0,
@@ -65,16 +67,12 @@ export function TextRevealBlur({
       viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 0.8,
-        delay: delay,
+        delay,
         ease: [0.22, 1, 0.36, 1],
       }}
-      onAnimationComplete={() => {
-        // Remove willChange após animação para evitar conflitos
-      }}
+      onAnimationComplete={() => clearWillChange(ref.current)}
       className={cn("inline-block", className)}
-      style={{ 
-        willChange: "filter, opacity, transform",
-      }}
+      style={{ willChange: "filter, opacity, transform" }}
     >
       {children}
     </motion.span>

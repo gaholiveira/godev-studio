@@ -58,7 +58,8 @@ export function ViosShowcase() {
       className={cn(
         "relative overflow-hidden",
         "border-y border-white/5 bg-zinc-900/20",
-        "group cursor-pointer"
+        "group cursor-pointer",
+        "content-visibility-auto contain-layout"
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -184,7 +185,7 @@ export function ViosShowcase() {
           <Link href="/vios" className="block h-full">
             <div
               className={cn(
-                "relative",
+                "relative img-scroll-contain touch-no-zoom",
                 "flex items-center justify-center",
                 "h-[400px] md:h-[500px] lg:h-[600px]",
                 "bg-black",
@@ -245,7 +246,7 @@ export function ViosShowcase() {
                   width={1200}
                   height={800}
                   className={cn(
-                    "object-contain",
+                    "object-contain touch-no-zoom",
                     "w-auto h-full",
                     "max-w-full",
                     "drop-shadow-2xl"

@@ -10,8 +10,9 @@ import { CTA } from "@/components/features/home/cta";
 
 export default function Home() {
   return (
-    <main className="relative bg-black">
-      <Hero />
+    <main className="relative bg-black content-visibility-auto contain-layout">
+      {/* Imagem de fundo: coloque em public/Images/ (ex: hero.jpg) e use: imageSrc="/Images/hero.jpg" imageAlt="GoDev Studio" */}
+      <Hero imageSrc="/Images/hero.png" />
       <TechStack />
       <ViosShowcase />
       <BentoGrid />

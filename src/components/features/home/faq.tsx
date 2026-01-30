@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +10,10 @@ import {
 } from "@/components/ui/accordion";
 import { MaskedTextReveal } from "@/components/ui/masked-text-reveal";
 import { cn } from "@/lib/utils";
+
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
 
 const itemVariants: Variants = {
   hidden: {
@@ -54,8 +59,12 @@ const faqItems: FAQItem[] = [
 ];
 
 export function FAQ() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   return (
     <motion.section
+      ref={sectionRef}
       id="faq"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -64,12 +73,14 @@ export function FAQ() {
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
+      onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
-      className="py-16 md:py-24 bg-zinc-950"
+      className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
+          ref={headerRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -77,6 +88,7 @@ export function FAQ() {
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
+          onAnimationComplete={() => clearWillChange(headerRef.current)}
           style={{ willChange: "transform, opacity" }}
           className="text-center mb-12 md:mb-16"
         >

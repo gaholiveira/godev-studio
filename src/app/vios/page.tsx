@@ -1,42 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Zap, ShoppingCart, Package, BarChart3, Shield, Smartphone, TrendingUp } from "lucide-react";
 import { MaskedTextReveal } from "@/components/ui/masked-text-reveal";
 import { TextRevealBlur } from "@/components/ui/text-reveal-blur";
+import { ScrollRevealPerf } from "@/components/ui/scroll-reveal-perf";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Componente ScrollReveal customizado com duração de 1.2s
-function ViosScrollReveal({
-  children,
-  className,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{
-        duration: 1.2,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = () => setReduced(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
 }
 
 export default function ViosCaseStudy() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <main className="relative min-h-screen bg-[#0F1F1A] text-[#F5F5DC] overflow-hidden">
       {/* Gradiente radial sutil para profundidade */}
@@ -48,15 +36,9 @@ export default function ViosCaseStudy() {
         }}
       />
 
-      {/* Botão flutuante "Voltar para Studio" */}
-      <ViosScrollReveal delay={0.2}>
-        <motion.div
-          className="fixed top-4 left-4 md:top-8 md:left-8 z-50"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <Button
+      {/* Botão flutuante "Voltar para Studio" — sem animação pesada */}
+      <div className="fixed top-4 left-4 md:top-8 md:left-8 z-50 vios-btn-reveal">
+        <Button
             variant="ghost"
             size="sm"
             className={cn(
@@ -76,15 +58,14 @@ export default function ViosCaseStudy() {
               <span className="sm:hidden">Voltar</span>
             </Link>
           </Button>
-        </motion.div>
-      </ViosScrollReveal>
+      </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32 content-visibility-auto contain-layout">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Lado Esquerdo: Texto */}
-            <ViosScrollReveal delay={0.1}>
+            <ScrollRevealPerf delay={0} reducedMotion={reducedMotion}>
               <div className="space-y-6 md:space-y-10 lg:space-y-12">
                 <h1
                   className={cn(
@@ -105,18 +86,18 @@ export default function ViosCaseStudy() {
                       "text-base sm:text-lg md:text-xl lg:text-2xl",
                       "text-[#F5F5DC]/90",
                       "leading-relaxed",
-                      "max-w-xl"
+                      "max-w-xl",
+                      "font-[var(--font-inter)]"
                     )}
-                    style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Um ecossistema digital desenvolvido para refletir a precisão de uma fórmula de elite.
                   </p>
                 </TextRevealBlur>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
 
             {/* Lado Direito: Visual */}
-            <ViosScrollReveal delay={0.3}>
+            <ScrollRevealPerf delay={100} reducedMotion={reducedMotion}>
               <div className="relative w-full flex items-center justify-center mt-8 lg:mt-0">
                 <div
                   className={cn(
@@ -141,17 +122,17 @@ export default function ViosCaseStudy() {
                   />
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
           </div>
         </div>
       </section>
 
       {/* Seção "O Desafio" */}
-      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 content-visibility-auto contain-layout">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Esquerda: Texto */}
-            <ViosScrollReveal delay={0.2}>
+            <ScrollRevealPerf delay={0} reducedMotion={reducedMotion}>
               <div>
                 <h2
                   className={cn(
@@ -168,9 +149,9 @@ export default function ViosCaseStudy() {
                   <p
                     className={cn(
                       "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
-                      "leading-relaxed mb-3 md:mb-4"
+                      "leading-relaxed mb-3 md:mb-4",
+                      "font-[var(--font-inter)]"
                     )}
-                    style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Criar um e-commerce farmacêutico de luxo que unisse a
                     precisão científica com uma experiência digital impecável.
@@ -181,9 +162,9 @@ export default function ViosCaseStudy() {
                   <p
                     className={cn(
                       "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
-                      "leading-relaxed"
+                      "leading-relaxed",
+                      "font-[var(--font-inter)]"
                     )}
-                    style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Cada detalhe precisava refletir o padrão de excelência da
                     Vios Labs, desde a <strong className="text-[#D4AF37]">Ciência de Dados</strong> até a <strong className="text-[#D4AF37]">Curadoria Digital</strong>,
@@ -191,10 +172,10 @@ export default function ViosCaseStudy() {
                   </p>
                 </TextRevealBlur>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
 
             {/* Direita: Card de Feature - Design System */}
-            <ViosScrollReveal delay={0.4}>
+            <ScrollRevealPerf delay={150} reducedMotion={reducedMotion}>
               <div
                 className={cn(
                   "relative",
@@ -355,32 +336,32 @@ export default function ViosCaseStudy() {
                   </div>
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
           </div>
         </div>
       </section>
 
       {/* Seção "Diferenciais Técnicos" - 4 Blocos */}
-      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 content-visibility-auto contain-layout">
         <div className="max-w-7xl mx-auto">
-          <ViosScrollReveal delay={0.1}>
+          <ScrollRevealPerf delay={0} reducedMotion={reducedMotion}>
             <h2
               className={cn(
                 "text-3xl sm:text-4xl md:text-5xl font-serif mb-8 md:mb-12 lg:mb-16 text-center",
-                "text-[#F5F5DC]"
+                "text-[#F5F5DC]",
+                "font-[var(--font-playfair)]"
               )}
-              style={{ fontFamily: "Playfair Display, serif" }}
             >
               <MaskedTextReveal delay={0.1}>
                 Arquitetura Escalável
               </MaskedTextReveal>
             </h2>
-          </ViosScrollReveal>
+          </ScrollRevealPerf>
 
           <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6 lg:gap-8">
             {/* Linha 1: Card 1 (2 cols) + Card 2 (1 col) */}
             {/* Bloco 01: E-commerce Headless - Destaque (2 colunas, linha 1) */}
-            <ViosScrollReveal delay={0.2}>
+            <ScrollRevealPerf delay={50} reducedMotion={reducedMotion}>
               <div
                 className={cn(
                   "relative group",
@@ -399,15 +380,14 @@ export default function ViosCaseStudy() {
                 <div className="relative z-10">
                   <h3
                     className={cn(
-                      "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37] mb-3 md:mb-4"
+                      "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37] mb-3 md:mb-4",
+                    "font-[var(--font-playfair)]"
                     )}
-                    style={{ fontFamily: "Playfair Display, serif" }}
                   >
                     E-commerce Headless
                   </h3>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Desenvolvimento focado em performance extrema e design de alta fidelidade.
                   </p>
@@ -437,7 +417,7 @@ export default function ViosCaseStudy() {
                     </div>
                     <div className="mt-4 pt-4 border-t border-[#D4AF37]/10">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-[#F5F5DC]/60" style={{ fontFamily: "Inter, sans-serif" }}>
+                        <span className="text-sm text-[#F5F5DC]/60 font-[var(--font-inter)]">
                           Ciência de Dados
                         </span>
                         <div className="px-3 py-1 bg-[#D4AF37]/20 border border-[#D4AF37]/30 rounded-full">
@@ -448,10 +428,10 @@ export default function ViosCaseStudy() {
                   </div>
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
 
             {/* Bloco 02: Stripe Connect - Técnico (1 coluna, linha 1) */}
-            <ViosScrollReveal delay={0.3}>
+            <ScrollRevealPerf delay={100} reducedMotion={reducedMotion}>
               <div
                 className={cn(
                   "relative group",
@@ -468,17 +448,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]",
+                      "font-[var(--font-playfair)]"
                       )}
-                      style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       Stripe Connect
                     </h3>
                     <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Fluxo de checkout otimizado com Apple Pay e Google Pay integrado.
                   </p>
@@ -493,7 +472,7 @@ export default function ViosCaseStudy() {
                       )}
                     >
                       <Shield className="h-4 w-4 text-[#D4AF37]" />
-                      <span className="text-xs text-[#D4AF37] font-medium" style={{ fontFamily: "Inter, sans-serif" }}>
+                      <span className="text-xs text-[#D4AF37] font-medium font-[var(--font-inter)]">
                         Secure Payment
                       </span>
                     </div>
@@ -506,7 +485,7 @@ export default function ViosCaseStudy() {
                         )}
                       >
                         <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/70" />
-                        <span className="text-xs text-[#F5F5DC]/70" style={{ fontFamily: "Inter, sans-serif" }}>
+                        <span className="text-xs text-[#F5F5DC]/70 font-[var(--font-inter)]">
                           Apple Pay
                         </span>
                       </div>
@@ -518,23 +497,23 @@ export default function ViosCaseStudy() {
                         )}
                       >
                         <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/70" />
-                        <span className="text-xs text-[#F5F5DC]/70" style={{ fontFamily: "Inter, sans-serif" }}>
+                        <span className="text-xs text-[#F5F5DC]/70 font-[var(--font-inter)]">
                           Google Pay
                         </span>
                       </div>
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4" style={{ fontFamily: "Inter, sans-serif" }}>
+                  <p className="text-xs text-[#F5F5DC]/50 mt-4 font-[var(--font-inter)]">
                     Curadoria Digital de pagamentos
                   </p>
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
 
             {/* Linha 2: Card 3 (1 col) + Card 4 (2 cols) */}
             {/* Bloco 03: SEO & Performance - Dados (1 coluna, linha 2) */}
-            <ViosScrollReveal delay={0.4}>
+            <ScrollRevealPerf delay={150} reducedMotion={reducedMotion}>
               <div
                 className={cn(
                   "relative group",
@@ -551,17 +530,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]",
+                      "font-[var(--font-playfair)]"
                       )}
-                      style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       SEO & Performance
                     </h3>
                     <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Lighthouse Score 100/100. Rankeamento orgânico priorizado pela arquitetura Next.js.
                   </p>
@@ -611,21 +589,21 @@ export default function ViosCaseStudy() {
                       ))}
                     </svg>
                     <div className="absolute bottom-2 right-2">
-                      <span className="text-xs text-[#D4AF37] font-medium" style={{ fontFamily: "Inter, sans-serif" }}>
+                      <span className="text-xs text-[#D4AF37] font-medium font-[var(--font-inter)]">
                         Score: 100/100
                       </span>
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4" style={{ fontFamily: "Inter, sans-serif" }}>
+                  <p className="text-xs text-[#F5F5DC]/50 mt-4 font-[var(--font-inter)]">
                     Arquitetura Escalável otimizada
                   </p>
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
 
             {/* Bloco 04: Mobile First - UX (2 colunas, linha 2) */}
-            <ViosScrollReveal delay={0.5}>
+            <ScrollRevealPerf delay={200} reducedMotion={reducedMotion}>
               <div
                 className={cn(
                   "relative group",
@@ -642,17 +620,16 @@ export default function ViosCaseStudy() {
                   <div className="flex items-start justify-between mb-4">
                     <h3
                       className={cn(
-                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]"
+                        "text-xl sm:text-2xl md:text-3xl font-serif text-[#D4AF37]",
+                      "font-[var(--font-playfair)]"
                       )}
-                      style={{ fontFamily: "Playfair Display, serif" }}
                     >
                       Mobile First
                     </h3>
                     <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Experiência de compra fluida em qualquer dispositivo, simulando apps nativos.
                   </p>
@@ -690,32 +667,32 @@ export default function ViosCaseStudy() {
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4 text-center" style={{ fontFamily: "Inter, sans-serif" }}>
+                  <p className="text-xs text-[#F5F5DC]/50 mt-4 text-center font-[var(--font-inter)]">
                     Experiência de Luxo em cada toque
                   </p>
                 </div>
               </div>
-            </ViosScrollReveal>
+            </ScrollRevealPerf>
           </div>
         </div>
       </section>
 
       {/* Seção "Stack de Performance" */}
-      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 content-visibility-auto contain-layout">
         <div className="max-w-7xl mx-auto">
-          <ViosScrollReveal delay={0.1}>
+          <ScrollRevealPerf delay={0} reducedMotion={reducedMotion}>
             <h2
               className={cn(
                 "text-3xl sm:text-4xl md:text-5xl font-serif mb-8 md:mb-12 lg:mb-16 text-center",
-                "text-[#F5F5DC]"
+                "text-[#F5F5DC]",
+                "font-[var(--font-playfair)]"
               )}
-              style={{ fontFamily: "Playfair Display, serif" }}
             >
               <MaskedTextReveal delay={0.1}>
                 Stack de Performance
               </MaskedTextReveal>
             </h2>
-          </ViosScrollReveal>
+          </ScrollRevealPerf>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
@@ -740,7 +717,7 @@ export default function ViosCaseStudy() {
                 subtitle: "Experiência de Luxo",
               },
             ].map((item, index) => (
-              <ViosScrollReveal key={index} delay={0.2 + index * 0.1}>
+              <ScrollRevealPerf key={index} delay={50 + index * 50} reducedMotion={reducedMotion}>
                 <div
                   className={cn(
                     "relative group",
@@ -778,46 +755,46 @@ export default function ViosCaseStudy() {
                     {item.subtitle}
                   </p>
                 </div>
-              </ViosScrollReveal>
+              </ScrollRevealPerf>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 content-visibility-auto contain-layout">
         <div className="max-w-4xl mx-auto text-center">
-          <ViosScrollReveal delay={0.2}>
+          <ScrollRevealPerf delay={0} reducedMotion={reducedMotion}>
             <h2
               className={cn(
                 "text-3xl sm:text-4xl md:text-5xl font-serif mb-6 md:mb-8",
-                "text-[#F5F5DC]"
+                "text-[#F5F5DC]",
+                "font-[var(--font-playfair)]"
               )}
-              style={{ fontFamily: "Playfair Display, serif" }}
             >
               <MaskedTextReveal delay={0.1}>
                 Deseja uma solução deste nível para sua marca?
               </MaskedTextReveal>
             </h2>
-          </ViosScrollReveal>
+          </ScrollRevealPerf>
 
-            <ViosScrollReveal delay={0.4}>
+            <ScrollRevealPerf delay={100} reducedMotion={reducedMotion}>
             <TextRevealBlur delay={0.3} className="block mb-8 md:mb-12">
               <p
                 className={cn(
                   "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
-                  "leading-relaxed max-w-2xl mx-auto px-4"
+                  "leading-relaxed max-w-2xl mx-auto px-4",
+                  "font-[var(--font-inter)]"
                 )}
-                style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Entre em contato e descubra como nossa <strong className="text-[#D4AF37]">Arquitetura Escalável</strong> e 
                 <strong className="text-[#D4AF37]"> Curadoria Digital</strong> podem elevar sua presença
                 digital ao próximo nível, criando uma <strong className="text-[#D4AF37]">Experiência de Luxo</strong> para seus clientes.
               </p>
             </TextRevealBlur>
-          </ViosScrollReveal>
+          </ScrollRevealPerf>
 
-          <ViosScrollReveal delay={0.6}>
+          <ScrollRevealPerf delay={200} reducedMotion={reducedMotion}>
             <Button
               size="lg"
               className={cn(
@@ -839,7 +816,7 @@ export default function ViosCaseStudy() {
                 Agendar Reunião Enterprise
               </a>
             </Button>
-          </ViosScrollReveal>
+          </ScrollRevealPerf>
         </div>
       </section>
     </main>

@@ -2,6 +2,10 @@
 
 import { motion, Variants } from "framer-motion";
 import { useRef } from "react";
+
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -205,8 +209,12 @@ function PricingCard({
 }
 
 export function Pricing() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   return (
     <motion.section
+      ref={sectionRef}
       id="planos"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -215,12 +223,14 @@ export function Pricing() {
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
+      onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
-      className="py-16 md:py-24 bg-zinc-950"
+      className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
+          ref={headerRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -228,6 +238,7 @@ export function Pricing() {
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
           }}
+          onAnimationComplete={() => clearWillChange(headerRef.current)}
           style={{ willChange: "transform, opacity" }}
           className="text-center mb-12 md:mb-16"
         >

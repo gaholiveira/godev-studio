@@ -3,7 +3,11 @@
 import { motion, Variants } from "framer-motion";
 import { KickerReveal } from "@/components/ui/text-reveal";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
+
+function clearWillChange(el: HTMLElement | null) {
+  if (el?.style) el.style.willChange = "auto";
+}
 
 // Durações aleatórias para flutuação orgânica (entre 3s e 5s)
 const getRandomDuration = () => 3 + Math.random() * 2;
@@ -15,7 +19,7 @@ function TechLogo({
   children: React.ReactNode;
   index: number;
 }) {
-  // Duração única por logo para movimento orgânico
+  const logoRef = useRef<HTMLDivElement>(null);
   const floatDuration = useMemo(() => getRandomDuration(), []);
 
   const logoVariants: Variants = {
@@ -46,10 +50,14 @@ function TechLogo({
 
   return (
     <motion.div
+      ref={logoRef}
       variants={logoVariants}
       initial="hidden"
       whileInView="visible"
-      onAnimationComplete={() => setIsVisible(true)}
+      onAnimationComplete={() => {
+        setIsVisible(true);
+        if (logoRef.current?.style) logoRef.current.style.willChange = "auto";
+      }}
       viewport={{ once: true, margin: "-50px" }}
       className={cn(
         "flex items-center justify-center",
@@ -77,7 +85,6 @@ function TechLogo({
           filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))",
           transition: { duration: 0.2 },
         }}
-        style={{ willChange: "transform, opacity, filter" }}
       >
         {children}
       </motion.div>
@@ -86,6 +93,8 @@ function TechLogo({
 }
 
 export function TechStack() {
+  const sectionRef = useRef<HTMLElement>(null);
+
   return (
     <motion.section
       id="tech-stack"
@@ -96,8 +105,10 @@ export function TechStack() {
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
+      onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
-      className={cn("py-16 md:py-24 border-t border-white/5 bg-zinc-950")}
+      ref={sectionRef}
+      className={cn("py-16 md:py-24 border-t border-white/5 bg-zinc-950 content-visibility-auto contain-layout")}
     >
       <div className={cn("max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")}>
         <div
