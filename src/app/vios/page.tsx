@@ -26,7 +26,7 @@ export default function ViosCaseStudy() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <main className="relative min-h-screen bg-[#0F1F1A] text-[#F5F5DC] overflow-hidden">
+    <main className="relative min-h-svh-stable bg-[#0F1F1A] text-[#F5F5DC] overflow-hidden">
       {/* Gradiente radial sutil para profundidade */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -61,7 +61,7 @@ export default function ViosCaseStudy() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32 content-visibility-auto contain-layout">
+      <section className="relative min-h-svh-stable flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 md:py-32 content-visibility-auto contain-layout">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
             {/* Lado Esquerdo: Texto */}

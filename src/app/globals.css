@@ -245,9 +245,14 @@
       touch-action: manipulation;
     }
   }
+  html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
   body {
-    overscroll-behavior-y: none;
+    overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
   }
   /* Imagens: não disparar zoom ao rolar (evita “input” comum com imagens no Instagram) */
   img,
@@ -256,10 +261,25 @@
   .touch-no-zoom {
     touch-action: manipulation;
     -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
   /* Contêiner de imagem em scroll: evitar reflow/layout shift */
   .img-scroll-contain {
     contain: layout style paint;
+  }
+
+  /*
+   * Altura estável em WebViews (Instagram etc.): 100vh muda quando a barra
+   * do browser aparece/desaparece ao rolar; 100svh mantém altura fixa.
+   */
+  .min-h-svh-stable {
+    min-height: 100vh;
+  }
+  @supports (min-height: 100svh) {
+    .min-h-svh-stable {
+      min-height: 100svh;
+    }
   }
 }
 
