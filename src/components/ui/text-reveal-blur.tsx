@@ -9,6 +9,8 @@ interface TextRevealBlurProps {
   className?: string;
   delay?: number;
   priority?: boolean;
+  /** Apenas opacity + blur (sem movimento y) para reduzir CLS acima da dobra */
+  opacityOnly?: boolean;
 }
 
 function clearWillChange(el: HTMLElement | null) {
@@ -20,23 +22,23 @@ export function TextRevealBlur({
   className,
   delay = 0,
   priority = false,
+  opacityOnly = false,
 }: TextRevealBlurProps) {
   const ref = useRef<HTMLSpanElement>(null);
+
+  const initialPriority = opacityOnly
+    ? { filter: "blur(10px)" as const, opacity: 0 }
+    : { filter: "blur(10px)" as const, opacity: 0, y: 10 };
+  const animatePriority = opacityOnly
+    ? { filter: "blur(0px)" as const, opacity: 1 }
+    : { filter: "blur(0px)" as const, opacity: 1, y: 0 };
 
   if (priority) {
     return (
       <motion.span
         ref={ref}
-        initial={{
-          filter: "blur(10px)",
-          opacity: 0,
-          y: 10,
-        }}
-        animate={{
-          filter: "blur(0px)",
-          opacity: 1,
-          y: 0,
-        }}
+        initial={initialPriority}
+        animate={animatePriority}
         transition={{
           duration: 0.8,
           delay,
@@ -44,26 +46,25 @@ export function TextRevealBlur({
         }}
         onAnimationComplete={() => clearWillChange(ref.current)}
         className={cn("inline-block", className)}
-        style={{ willChange: "filter, opacity, transform" }}
+        style={{ willChange: "filter, opacity" + (opacityOnly ? "" : ", transform") }}
       >
         {children}
       </motion.span>
     );
   }
 
+  const initial = opacityOnly
+    ? { filter: "blur(10px)" as const, opacity: 0 }
+    : { filter: "blur(10px)" as const, opacity: 0, y: 10 };
+  const whileInViewAnimate = opacityOnly
+    ? { filter: "blur(0px)" as const, opacity: 1 }
+    : { filter: "blur(0px)" as const, opacity: 1, y: 0 };
+
   return (
     <motion.span
       ref={ref}
-      initial={{
-        filter: "blur(10px)",
-        opacity: 0,
-        y: 10,
-      }}
-      whileInView={{
-        filter: "blur(0px)",
-        opacity: 1,
-        y: 0,
-      }}
+      initial={initial}
+      whileInView={whileInViewAnimate}
       viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 0.8,
@@ -72,7 +73,7 @@ export function TextRevealBlur({
       }}
       onAnimationComplete={() => clearWillChange(ref.current)}
       className={cn("inline-block", className)}
-      style={{ willChange: "filter, opacity, transform" }}
+      style={{ willChange: "filter, opacity" + (opacityOnly ? "" : ", transform") }}
     >
       {children}
     </motion.span>

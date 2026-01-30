@@ -1,17 +1,42 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/features/home/hero";
-import { TechStack } from "@/components/features/home/tech-stack";
-import { ViosShowcase } from "@/components/features/home/vios-showcase";
-import { BentoGrid } from "@/components/features/home/bento-grid";
-import { Pricing } from "@/components/features/home/pricing";
-import { FAQ } from "@/components/features/home/faq";
-import { CTA } from "@/components/features/home/cta";
+
+/** Seções abaixo do hero: JS em chunks separados, carregados quando necessário */
+const TechStack = dynamic(
+  () => import("@/components/features/home/tech-stack").then((m) => ({ default: m.TechStack })),
+  { ssr: true }
+);
+
+const ViosShowcase = dynamic(
+  () => import("@/components/features/home/vios-showcase").then((m) => ({ default: m.ViosShowcase })),
+  { ssr: true }
+);
+
+const BentoGrid = dynamic(
+  () => import("@/components/features/home/bento-grid").then((m) => ({ default: m.BentoGrid })),
+  { ssr: true }
+);
+
+const Pricing = dynamic(
+  () => import("@/components/features/home/pricing").then((m) => ({ default: m.Pricing })),
+  { ssr: true }
+);
+
+const FAQ = dynamic(
+  () => import("@/components/features/home/faq").then((m) => ({ default: m.FAQ })),
+  { ssr: true }
+);
+
+const CTA = dynamic(
+  () => import("@/components/features/home/cta").then((m) => ({ default: m.CTA })),
+  { ssr: true }
+);
 
 export default function Home() {
   return (
     <main className="relative bg-black content-visibility-auto contain-layout">
-      {/* Imagem de fundo: coloque em public/Images/ (ex: hero.jpg) e use: imageSrc="/Images/hero.jpg" imageAlt="GoDev Studio" */}
       <Hero imageSrc="/Images/hero.png" />
       <TechStack />
       <ViosShowcase />

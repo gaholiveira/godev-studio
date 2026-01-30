@@ -8,6 +8,8 @@ interface MaskedTextRevealProps {
   className?: string;
   delay?: number;
   priority?: boolean;
+  /** Apenas opacity (sem movimento y) para reduzir CLS acima da dobra */
+  opacityOnly?: boolean;
 }
 
 export function MaskedTextReveal({
@@ -15,26 +17,24 @@ export function MaskedTextReveal({
   className,
   delay = 0,
   priority = false,
+  opacityOnly = false,
 }: MaskedTextRevealProps) {
-  // Efeito de "construção" simplificado: apenas movimento
-  // Garantir que o texto sempre seja visível (sem opacity inicial)
-  
+  const initial = opacityOnly ? { opacity: 0 } : { y: 30 };
+  const animate = opacityOnly ? { opacity: 1 } : { y: 0 };
+  const whileInViewAnimate = opacityOnly ? { opacity: 1 } : { y: 0 };
+
   if (priority) {
     return (
       <motion.span
-        initial={{ 
-          y: 30,
-        }}
-        animate={{ 
-          y: 0,
-        }}
+        initial={initial}
+        animate={animate}
         transition={{
-          duration: 0.9,
-          delay: delay,
+          duration: opacityOnly ? 0.6 : 0.9,
+          delay,
           ease: [0.22, 1, 0.36, 1],
         }}
         className={cn("inline-block", className)}
-        style={{ opacity: 1 }}
+        style={opacityOnly ? undefined : { opacity: 1 }}
       >
         {children}
       </motion.span>
@@ -43,16 +43,16 @@ export function MaskedTextReveal({
 
   return (
     <motion.span
-      initial={{ y: 30 }}
-      whileInView={{ y: 0 }}
+      initial={initial}
+      whileInView={whileInViewAnimate}
       viewport={{ once: true, amount: 0.1, margin: "-50px" }}
       transition={{
-        duration: 0.7,
+        duration: opacityOnly ? 0.5 : 0.7,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn("inline-block", className)}
-      style={{ opacity: 1 }}
+      style={opacityOnly ? undefined : { opacity: 1 }}
     >
       {children}
     </motion.span>

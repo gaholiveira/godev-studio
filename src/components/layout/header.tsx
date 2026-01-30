@@ -84,7 +84,7 @@ export function Header() {
             <SmoothScrollLink
               href="#servicos"
               className={cn(
-                "text-zinc-400 hover:text-white",
+                "text-zinc-300 hover:text-white",
                 "transition-colors",
               )}
             >
@@ -93,7 +93,7 @@ export function Header() {
             <SmoothScrollLink
               href="#planos"
               className={cn(
-                "text-zinc-400 hover:text-white",
+                "text-zinc-300 hover:text-white",
                 "transition-colors",
               )}
             >
@@ -102,7 +102,7 @@ export function Header() {
             <SmoothScrollLink
               href="#tech-stack"
               className={cn(
-                "text-zinc-400 hover:text-white",
+                "text-zinc-300 hover:text-white",
                 "transition-colors",
               )}
             >
@@ -111,7 +111,7 @@ export function Header() {
             <Link
               href="/vios"
               className={cn(
-                "text-zinc-400 hover:text-white",
+                "text-zinc-300 hover:text-white",
                 "transition-colors",
                 "flex items-center gap-1.5",
                 "relative group"
@@ -130,7 +130,7 @@ export function Header() {
               size="sm"
               className={cn(
                 "hidden md:inline-flex",
-                "border-zinc-800 text-zinc-300",
+                "border-zinc-700 text-zinc-200",
                 "hover:bg-zinc-900 hover:text-white",
               )}
             >
@@ -144,7 +144,7 @@ export function Header() {
               className={cn(
                 "md:hidden",
                 "relative p-2 rounded-md",
-                "text-zinc-400 hover:text-white",
+                "text-zinc-300 hover:text-white",
                 "hover:bg-zinc-900",
                 "transition-colors",
                 "min-h-[44px] min-w-[44px]",
@@ -281,7 +281,7 @@ export function Header() {
                           className={cn(
                             "block",
                             "text-base font-medium",
-                            "text-zinc-400 hover:text-white",
+                            "text-zinc-300 hover:text-white",
                             "px-4 py-3 rounded-lg",
                             "text-center",
                             "hover:bg-zinc-900/50",
@@ -300,7 +300,7 @@ export function Header() {
                           className={cn(
                             "block",
                             "text-base font-medium",
-                            "text-zinc-400 hover:text-white",
+                            "text-zinc-300 hover:text-white",
                             "px-4 py-3 rounded-lg",
                             "text-center",
                             "hover:bg-zinc-900/50",

@@ -26,7 +26,7 @@ export function Footer() {
             >
               GoDev.
             </h3>
-            <p className={cn("text-sm text-zinc-500 max-w-xs")}>
+            <p className={cn("text-sm text-zinc-400 max-w-xs")}>
               Agência de desenvolvimento high-end.
             </p>
           </div>
@@ -44,7 +44,7 @@ export function Footer() {
               <Link
                 href="/"
                 className={cn(
-                  "text-sm text-zinc-500 hover:text-white",
+                  "text-sm text-zinc-400 hover:text-white",
                   "transition-colors",
                 )}
               >
@@ -53,7 +53,7 @@ export function Footer() {
               <SmoothScrollLink
                 href="#planos"
                 className={cn(
-                  "text-sm text-zinc-500 hover:text-white",
+                  "text-sm text-zinc-400 hover:text-white",
                   "transition-colors",
                 )}
               >
@@ -62,7 +62,7 @@ export function Footer() {
               <SmoothScrollLink
                 href="#cta"
                 className={cn(
-                  "text-sm text-zinc-500 hover:text-white",
+                  "text-sm text-zinc-400 hover:text-white",
                   "transition-colors",
                 )}
               >
@@ -86,7 +86,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-zinc-500 hover:text-white",
+                  "text-zinc-400 hover:text-white",
                   "transition-colors",
                   "p-2 rounded-md hover:bg-zinc-900",
                   "min-h-[44px] min-w-[44px] flex items-center justify-center",
@@ -100,7 +100,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-zinc-500 hover:text-white",
+                  "text-zinc-400 hover:text-white",
                   "transition-colors",
                   "p-2 rounded-md hover:bg-zinc-900",
                   "min-h-[44px] min-w-[44px] flex items-center justify-center",
@@ -114,7 +114,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "text-zinc-500 hover:text-white",
+                  "text-zinc-400 hover:text-white",
                   "transition-colors",
                   "p-2 rounded-md hover:bg-zinc-900",
                   "min-h-[44px] min-w-[44px] flex items-center justify-center",
@@ -131,7 +131,7 @@ export function Footer() {
         <div
           className={cn(
             "pt-8 border-t border-zinc-900",
-            "text-center text-sm text-zinc-500",
+            "text-center text-sm text-zinc-400",
           )}
         >
           <p>Copyright © 2026 GoDev Studio. All rights reserved.</p>

@@ -2,37 +2,23 @@
 
 import { useEffect, useState, RefObject } from "react";
 
+/** Usa ResizeObserver em vez de offsetHeight + MutationObserver para evitar reflow forçado */
 export function useFooterHeight(footerRef: RefObject<HTMLElement | null>) {
   const [footerHeight, setFooterHeight] = useState(0);
 
   useEffect(() => {
-    const calculateHeight = () => {
-      if (footerRef.current) {
-        setFooterHeight(footerRef.current.offsetHeight);
+    const el = footerRef.current;
+    if (!el) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const height = entry.contentRect.height;
+        setFooterHeight(height);
       }
-    };
+    });
 
-    // Calcular altura inicial
-    calculateHeight();
-
-    // Recalcular em resize
-    window.addEventListener("resize", calculateHeight);
-
-    // Recalcular quando o conteúdo mudar (usando MutationObserver)
-    const observer = new MutationObserver(calculateHeight);
-    if (footerRef.current) {
-      observer.observe(footerRef.current, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ["class", "style"],
-      });
-    }
-
-    return () => {
-      window.removeEventListener("resize", calculateHeight);
-      observer.disconnect();
-    };
+    resizeObserver.observe(el);
+    return () => resizeObserver.disconnect();
   }, [footerRef]);
 
   return footerHeight;

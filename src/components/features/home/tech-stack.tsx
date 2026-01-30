@@ -119,7 +119,7 @@ export function TechStack() {
           {/* Label com reveal sutil */}
           <KickerReveal
             className={cn(
-              "text-xs font-semibold tracking-widest text-zinc-500 uppercase mb-8",
+              "text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-8",
             )}
             delay={0}
           >

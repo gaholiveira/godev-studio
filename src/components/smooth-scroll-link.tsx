@@ -86,11 +86,9 @@ export function SmoothScrollLink({
       return;
     }
 
-    // Adicionar blur no body quando o scroll inicia
+    // Adicionar blur no body quando o scroll inicia (evitar reflow: não ler offsetHeight)
     if (typeof document !== "undefined") {
       document.body.classList.add("scroll-blur");
-      // Forçar repaint para garantir que a transição funcione
-      void document.body.offsetHeight;
     }
 
     // Callback para remover blur quando o scroll terminar
@@ -131,28 +129,24 @@ export function SmoothScrollLink({
           // Verificar se passou tempo suficiente desde o último movimento
           const timeSinceLastMove = Date.now() - scrollStartTime;
           if (timeSinceLastMove > 200) {
-            // Verificar se o elemento alvo está visível no viewport
-            const rect = targetElement.getBoundingClientRect();
-            const isInViewport = 
-              rect.top >= 0 && 
-              rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.3;
-            
-            if (isInViewport) {
-              // Scroll parou e elemento está visível, remover blur com delay suave
-              setTimeout(() => {
-                removeBlur();
-              }, 300);
-              // Remover listener se disponível
-              if (lenis && typeof lenis.off === "function" && isListening) {
-                lenis.off("scroll", checkScrollStop);
-                isListening = false;
+            // Ler layout no próximo frame para evitar reflow forçado (após Lenis escrever)
+            requestAnimationFrame(() => {
+              const rect = targetElement.getBoundingClientRect();
+              const viewportH = window.innerHeight || document.documentElement.clientHeight;
+              const isInViewport =
+                rect.top >= 0 && rect.top <= viewportH * 0.3;
+
+              if (isInViewport) {
+                setTimeout(() => removeBlur(), 300);
+                if (lenis && typeof lenis.off === "function" && isListening) {
+                  lenis.off("scroll", checkScrollStop);
+                  isListening = false;
+                }
+              } else {
+                scrollTimeout = setTimeout(checkScrollStop, 100);
               }
-            } else {
-              // Ainda não chegou na posição, verificar novamente
-              scrollTimeout = setTimeout(checkScrollStop, 100);
-            }
+            });
           } else {
-            // Ainda pode estar se movendo, verificar novamente
             scrollTimeout = setTimeout(checkScrollStop, 100);
           }
         }
@@ -194,14 +188,12 @@ export function SmoothScrollLink({
         clearTimeout(scrollTimeout);
       }, duration * 1000 + 500);
     } else {
-      // Fallback para scroll nativo se Lenis não estiver disponível
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition + offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
+      // Fallback para scroll nativo: ler layout em rAF para evitar reflow forçado
+      requestAnimationFrame(() => {
+        const elementPosition =
+          targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition + offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       });
 
       // Remover blur após um tempo estimado para scroll nativo

@@ -135,7 +135,7 @@ export function FAQ() {
                 >
               <AccordionTrigger
                 className={cn(
-                  "text-left text-zinc-300 hover:text-white",
+                  "text-left text-zinc-200 hover:text-white",
                   "hover:no-underline py-6",
                   "font-medium",
                 )}
@@ -143,7 +143,7 @@ export function FAQ() {
                 {item.question}
               </AccordionTrigger>
               <AccordionContent
-                className={cn("text-zinc-400 pb-6", "leading-relaxed")}
+                className={cn("text-zinc-300 pb-6", "leading-relaxed")}
               >
                 {item.answer}
               </AccordionContent>

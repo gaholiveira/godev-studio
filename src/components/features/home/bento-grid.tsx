@@ -75,7 +75,7 @@ function BentoCard({
       {/* Icon */}
       <div
         className={cn(
-          "relative z-10 mb-4 text-zinc-400",
+          "relative z-10 mb-4 text-zinc-300",
           "group-hover:text-white transition-colors",
         )}
       >
@@ -95,8 +95,8 @@ function BentoCard({
         <TextRevealBlur
           delay={0.5}
           className={cn(
-            "text-sm md:text-base text-zinc-400",
-            "group-hover:text-zinc-300 transition-colors",
+            "text-sm md:text-base text-zinc-300",
+            "group-hover:text-zinc-200 transition-colors",
             "block",
           )}
         >

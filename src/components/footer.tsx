@@ -7,7 +7,7 @@ export const Footer = forwardRef<HTMLElement>((props, ref) => {
   return (
     <footer 
       ref={ref}
-      className="fixed bottom-0 left-0 right-0 w-full py-8 border-t border-zinc-900 bg-zinc-950 text-zinc-500 text-sm" 
+      className="fixed bottom-0 left-0 right-0 w-full py-8 border-t border-zinc-900 bg-zinc-950 text-zinc-400 text-sm" 
       style={{ zIndex: 0 }}
     >
       <div className="container px-4 md:px-6 mx-auto">
@@ -19,13 +19,13 @@ export const Footer = forwardRef<HTMLElement>((props, ref) => {
           <div className="flex gap-6 items-center">
             <Link
               href="/terms"
-              className="text-xs text-zinc-500 hover:text-white transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
+              className="text-xs text-zinc-400 hover:text-white transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
             >
               Termos
             </Link>
             <Link
               href="/privacy"
-              className="text-xs text-zinc-500 hover:text-white transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
+              className="text-xs text-zinc-400 hover:text-white transition-all min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95"
             >
               Privacidade
             </Link>
@@ -38,7 +38,7 @@ export const Footer = forwardRef<HTMLElement>((props, ref) => {
               href="https://www.linkedin.com/in/gabriel-oliveira"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-white transition-all min-h-[44px] inline-flex items-center active:scale-95"
+              className="text-zinc-300 hover:text-white transition-all min-h-[44px] inline-flex items-center active:scale-95"
             >
               Gabriel Oliveira
             </a>

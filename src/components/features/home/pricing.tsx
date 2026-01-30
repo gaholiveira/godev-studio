@@ -115,7 +115,7 @@ function PricingCard({
         {description && (
           <TextRevealBlur
             delay={0.6}
-            className="text-sm text-zinc-400 mb-3 block"
+            className="text-sm text-zinc-300 mb-3 block"
           >
             {description}
           </TextRevealBlur>
@@ -136,7 +136,7 @@ function PricingCard({
           {subtitle && (
             <TextRevealBlur
               delay={0.6}
-              className="text-xs md:text-sm text-zinc-500 block"
+              className="text-xs md:text-sm text-zinc-400 block"
             >
               {subtitle}
             </TextRevealBlur>
@@ -254,7 +254,7 @@ export function Pricing() {
           <TextRevealBlur
             delay={0.15}
             className={cn(
-              "text-base md:text-lg text-zinc-400 max-w-2xl mx-auto",
+              "text-base md:text-lg text-zinc-300 max-w-2xl mx-auto",
               "block",
             )}
           >

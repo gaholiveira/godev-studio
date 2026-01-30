@@ -45,14 +45,13 @@ export function CustomCursor() {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
-
+      // Evitar getComputedStyle (reflow forçado); checar apenas DOM/tag/role
       const isInteractive =
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.closest("a") !== null ||
         target.closest("button") !== null ||
-        target.closest('[role="button"]') !== null ||
-        window.getComputedStyle(target).cursor === "pointer";
+        target.closest('[role="button"]') !== null;
 
       setIsHovering(isInteractive);
     };

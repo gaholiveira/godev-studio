@@ -16,21 +16,20 @@ export function Magnetic({
 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const rafId = useRef<number>(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = e;
-    const { width, height, left, top } =
-      ref.current?.getBoundingClientRect() || {
-        width: 0,
-        height: 0,
-        left: 0,
-        top: 0,
-      };
-
-    const x = (clientX - (left + width / 2)) * strength;
-    const y = (clientY - (top + height / 2)) * strength;
-
-    setPosition({ x, y });
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = 0;
+      const rect = ref.current?.getBoundingClientRect();
+      if (!rect) return;
+      const { width, height, left, top } = rect;
+      const x = (clientX - (left + width / 2)) * strength;
+      const y = (clientY - (top + height / 2)) * strength;
+      setPosition({ x, y });
+    });
   };
 
   const handleMouseLeave = () => {

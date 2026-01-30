@@ -93,14 +93,14 @@ export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
           "space-y-6 md:space-y-8",
         )}
       >
-        {/* Badge - Aparece primeiro */}
+        {/* Badge - Aparece primeiro (apenas opacity para evitar CLS) */}
         <motion.div
           ref={badgeRef}
-          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
           onAnimationComplete={() => clearWillChange(badgeRef.current)}
-          style={{ willChange: reducedMotion ? "auto" : "transform, opacity" }}
+          style={{ willChange: reducedMotion ? "auto" : "opacity" }}
         >
           <Badge
             variant="outline"
@@ -129,6 +129,7 @@ export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
               key={index}
               delay={reducedMotion ? 0 : 0.15 + index * 0.08}
               priority
+              opacityOnly
               className={cn(
                 "block",
                 index === 1 && "text-gradient-metallic",
@@ -139,13 +140,14 @@ export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
           ))}
         </h1>
 
-        {/* Subheadline - Aparece depois do título com blur */}
+        {/* Subheadline - Aparece depois do título com blur (opacityOnly para CLS) */}
         <TextRevealBlur
           delay={reducedMotion ? 0 : 0.5}
           priority
+          opacityOnly
           className={cn(
             "text-base md:text-lg lg:text-xl",
-            "text-zinc-400 max-w-2xl",
+            "text-zinc-300 max-w-2xl",
             "leading-relaxed md:leading-normal",
             "block",
           )}
@@ -154,14 +156,14 @@ export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
           entrega ágil e foco total no seu produto.
         </TextRevealBlur>
 
-        {/* CTA Buttons - Aparecem por último */}
+        {/* CTA Buttons - Aparecem por último (apenas opacity para evitar CLS) */}
         <motion.div
           ref={ctaRef}
-          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={reducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.65 }}
           onAnimationComplete={() => clearWillChange(ctaRef.current)}
-          style={{ willChange: reducedMotion ? "auto" : "transform, opacity" }}
+          style={{ willChange: reducedMotion ? "auto" : "opacity" }}
           className={cn(
             "flex flex-col sm:flex-row gap-4 md:gap-6",
             "items-center justify-center",
@@ -189,9 +191,9 @@ export function Hero({ imageSrc, imageAlt = "" }: HeroProps) {
               variant="ghost"
               size="lg"
               className={cn(
-                "text-zinc-300",
+                "text-zinc-200",
                 "hover:bg-zinc-900 hover:text-white",
-                "border border-zinc-800",
+                "border border-zinc-700",
                 "min-h-[44px] min-w-[160px]",
                 "font-medium",
               )}

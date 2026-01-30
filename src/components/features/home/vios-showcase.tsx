@@ -97,7 +97,7 @@ export function ViosShowcase() {
             {/* Eyebrow */}
             <p
               className={cn(
-                "text-xs tracking-widest uppercase text-zinc-500",
+                "text-xs tracking-widest uppercase text-zinc-400",
                 "font-medium"
               )}
             >
@@ -120,7 +120,7 @@ export function ViosShowcase() {
             <TextRevealBlur
               delay={0.3}
               className={cn(
-                "text-base md:text-lg text-zinc-400",
+                "text-base md:text-lg text-zinc-300",
                 "leading-relaxed max-w-xl",
                 "block"
               )}

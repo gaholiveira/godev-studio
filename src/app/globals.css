@@ -172,12 +172,12 @@
     background-repeat: repeat;
   }
 
-  /* Tipografia Global - Parágrafos não devem ser branco puro */
+  /* Contraste WCAG AA: parágrafos em zinc-300 (~7.5:1 em zinc-950) */
   p {
-    @apply text-zinc-400;
+    @apply text-zinc-300;
   }
 
-  /* Títulos principais com gradiente metálico */
+  /* Títulos: zinc-100/200 para contraste suficiente */
   h1, h2 {
     @apply text-zinc-100;
   }

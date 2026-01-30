@@ -82,7 +82,7 @@ export function CTA() {
           <TextRevealBlur
             delay={0.2}
             className={cn(
-              "text-base md:text-lg text-zinc-400 mb-8",
+              "text-base md:text-lg text-zinc-300 mb-8",
               "max-w-2xl mx-auto text-center",
               "leading-relaxed",
               "block",
@@ -126,7 +126,7 @@ export function CTA() {
                 size="lg"
                 className={cn(
                   "h-14 px-8 text-lg font-medium",
-                  "text-zinc-300 border border-white/10",
+                  "text-zinc-200 border border-white/10",
                   "hover:bg-white/5 hover:text-white hover:border-white/20",
                   "transition-all duration-300",
                   "min-w-[180px]",
@@ -139,7 +139,7 @@ export function CTA() {
           </div>
 
           {/* Social Proof Sutil */}
-          <div className="relative z-10 mt-8 flex items-center justify-center gap-6 text-sm text-zinc-500">
+          <div className="relative z-10 mt-8 flex items-center justify-center gap-6 text-sm text-zinc-400">
             <div className="flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
               <span>Disponível agora</span>

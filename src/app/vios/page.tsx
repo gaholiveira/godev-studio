@@ -84,7 +84,7 @@ export default function ViosCaseStudy() {
                   <p
                     className={cn(
                       "text-base sm:text-lg md:text-xl lg:text-2xl",
-                      "text-[#F5F5DC]/90",
+                      "text-[#F5F5DC]",
                       "leading-relaxed",
                       "max-w-xl",
                       "font-[var(--font-inter)]"
@@ -148,7 +148,7 @@ export default function ViosCaseStudy() {
                 <TextRevealBlur delay={0.3} className="block">
                   <p
                     className={cn(
-                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
+                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/95",
                       "leading-relaxed mb-3 md:mb-4",
                       "font-[var(--font-inter)]"
                     )}
@@ -161,7 +161,7 @@ export default function ViosCaseStudy() {
                   </p>
                   <p
                     className={cn(
-                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
+                      "text-base sm:text-lg md:text-xl text-[#F5F5DC]/95",
                       "leading-relaxed",
                       "font-[var(--font-inter)]"
                     )}
@@ -199,7 +199,7 @@ export default function ViosCaseStudy() {
                 <div className="mb-8">
                   <p
                     className={cn(
-                      "text-sm text-[#F5F5DC]/60 mb-4",
+                      "text-sm text-[#F5F5DC]/85 mb-4",
                       "font-[var(--font-inter)]"
                     )}
                   >
@@ -211,21 +211,21 @@ export default function ViosCaseStudy() {
                         className="h-20 rounded-lg mb-2"
                         style={{ backgroundColor: "#0B1E19" }}
                       />
-                      <p className="text-xs text-[#F5F5DC]/50">Deep Forest</p>
+                      <p className="text-xs text-[#F5F5DC]/75">Deep Forest</p>
                     </div>
                     <div className="flex-1">
                       <div
                         className="h-20 rounded-lg mb-2"
                         style={{ backgroundColor: "#D4AF37" }}
                       />
-                      <p className="text-xs text-[#F5F5DC]/50">Metallic Gold</p>
+                      <p className="text-xs text-[#F5F5DC]/75">Metallic Gold</p>
                     </div>
                     <div className="flex-1">
                       <div
                         className="h-20 rounded-lg mb-2"
                         style={{ backgroundColor: "#F2F2F0" }}
                       />
-                      <p className="text-xs text-[#F5F5DC]/50">Off White</p>
+                      <p className="text-xs text-[#F5F5DC]/75">Off White</p>
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export default function ViosCaseStudy() {
                 <div>
                   <p
                     className={cn(
-                      "text-sm text-[#F5F5DC]/60 mb-5",
+                      "text-sm text-[#F5F5DC]/85 mb-5",
                       "font-[var(--font-inter)]",
                       "uppercase tracking-wider"
                     )}
@@ -261,7 +261,7 @@ export default function ViosCaseStudy() {
                           >
                             Playfair Display
                           </p>
-                          <p className="text-xs text-[#F5F5DC]/50">
+                          <p className="text-xs text-[#F5F5DC]/75">
                             Títulos e Headings
                           </p>
                         </div>
@@ -278,7 +278,7 @@ export default function ViosCaseStudy() {
                         </p>
                         <p
                           className={cn(
-                            "text-sm text-[#F5F5DC]/70 mt-2",
+                            "text-sm text-[#F5F5DC]/90 mt-2",
                             "font-[var(--font-playfair)]"
                           )}
                         >
@@ -307,7 +307,7 @@ export default function ViosCaseStudy() {
                           >
                             Inter
                           </p>
-                          <p className="text-xs text-[#F5F5DC]/50">
+                          <p className="text-xs text-[#F5F5DC]/75">
                             Corpo de Texto
                           </p>
                         </div>
@@ -315,7 +315,7 @@ export default function ViosCaseStudy() {
                       <div className="mt-3 pt-3 border-t border-[#D4AF37]/10">
                         <p
                           className={cn(
-                            "text-sm md:text-base text-[#F5F5DC]/90",
+                            "text-sm md:text-base text-[#F5F5DC]",
                             "font-[var(--font-inter)]",
                             "leading-relaxed"
                           )}
@@ -324,7 +324,7 @@ export default function ViosCaseStudy() {
                         </p>
                         <p
                           className={cn(
-                            "text-xs md:text-sm text-[#F5F5DC]/70 mt-2",
+                            "text-xs md:text-sm text-[#F5F5DC]/90 mt-2",
                             "font-[var(--font-inter)]",
                             "leading-relaxed"
                           )}
@@ -387,7 +387,7 @@ export default function ViosCaseStudy() {
                     E-commerce Headless
                   </h3>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/95 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Desenvolvimento focado em performance extrema e design de alta fidelidade.
                   </p>
@@ -417,7 +417,7 @@ export default function ViosCaseStudy() {
                     </div>
                     <div className="mt-4 pt-4 border-t border-[#D4AF37]/10">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-[#F5F5DC]/60 font-[var(--font-inter)]">
+                        <span className="text-sm text-[#F5F5DC]/85 font-[var(--font-inter)]">
                           Ciência de Dados
                         </span>
                         <div className="px-3 py-1 bg-[#D4AF37]/20 border border-[#D4AF37]/30 rounded-full">
@@ -457,7 +457,7 @@ export default function ViosCaseStudy() {
                     <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/95 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Fluxo de checkout otimizado com Apple Pay e Google Pay integrado.
                   </p>
@@ -484,8 +484,8 @@ export default function ViosCaseStudy() {
                           "flex items-center justify-center gap-1.5"
                         )}
                       >
-                        <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/70" />
-                        <span className="text-xs text-[#F5F5DC]/70 font-[var(--font-inter)]">
+                        <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/90" />
+                        <span className="text-xs text-[#F5F5DC]/90 font-[var(--font-inter)]">
                           Apple Pay
                         </span>
                       </div>
@@ -496,15 +496,15 @@ export default function ViosCaseStudy() {
                           "flex items-center justify-center gap-1.5"
                         )}
                       >
-                        <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/70" />
-                        <span className="text-xs text-[#F5F5DC]/70 font-[var(--font-inter)]">
+                        <ShoppingCart className="h-3.5 w-3.5 text-[#F5F5DC]/90" />
+                        <span className="text-xs text-[#F5F5DC]/90 font-[var(--font-inter)]">
                           Google Pay
                         </span>
                       </div>
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4 font-[var(--font-inter)]">
+                  <p className="text-xs text-[#F5F5DC]/75 mt-4 font-[var(--font-inter)]">
                     Curadoria Digital de pagamentos
                   </p>
                 </div>
@@ -539,7 +539,7 @@ export default function ViosCaseStudy() {
                     <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/95 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Lighthouse Score 100/100. Rankeamento orgânico priorizado pela arquitetura Next.js.
                   </p>
@@ -595,7 +595,7 @@ export default function ViosCaseStudy() {
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4 font-[var(--font-inter)]">
+                  <p className="text-xs text-[#F5F5DC]/75 mt-4 font-[var(--font-inter)]">
                     Arquitetura Escalável otimizada
                   </p>
                 </div>
@@ -629,7 +629,7 @@ export default function ViosCaseStudy() {
                     <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-[#D4AF37]" />
                   </div>
                   <p
-                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/80 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
+                    className="text-sm sm:text-base md:text-lg text-[#F5F5DC]/95 mb-4 md:mb-6 leading-relaxed font-[var(--font-inter)]"
                   >
                     Experiência de compra fluida em qualquer dispositivo, simulando apps nativos.
                   </p>
@@ -667,7 +667,7 @@ export default function ViosCaseStudy() {
                     </div>
                   </div>
                   
-                  <p className="text-xs text-[#F5F5DC]/50 mt-4 text-center font-[var(--font-inter)]">
+                  <p className="text-xs text-[#F5F5DC]/75 mt-4 text-center font-[var(--font-inter)]">
                     Experiência de Luxo em cada toque
                   </p>
                 </div>
@@ -748,7 +748,7 @@ export default function ViosCaseStudy() {
                   </h3>
                   <p
                     className={cn(
-                      "text-xs sm:text-sm text-[#F5F5DC]/60",
+                      "text-xs sm:text-sm text-[#F5F5DC]/85",
                       "font-[var(--font-inter)]"
                     )}
                   >
@@ -782,7 +782,7 @@ export default function ViosCaseStudy() {
             <TextRevealBlur delay={0.3} className="block mb-8 md:mb-12">
               <p
                 className={cn(
-                  "text-base sm:text-lg md:text-xl text-[#F5F5DC]/80",
+                  "text-base sm:text-lg md:text-xl text-[#F5F5DC]/95",
                   "leading-relaxed max-w-2xl mx-auto px-4",
                   "font-[var(--font-inter)]"
                 )}
