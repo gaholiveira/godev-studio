@@ -26,7 +26,30 @@ const Pricing = dynamic(
 
 const FAQ = dynamic(
   () => import("@/components/features/home/faq").then((m) => ({ default: m.FAQ })),
-  { ssr: true }
+  {
+    ssr: false,
+    loading: () => (
+      <section
+        id="faq"
+        className="py-16 md:py-24 bg-zinc-950 min-h-[320px] content-visibility-auto contain-layout"
+        aria-hidden="true"
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16">
+            <div className="h-10 w-64 mx-auto bg-zinc-800/50 rounded animate-pulse" />
+          </div>
+          <div className="space-y-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="h-20 rounded-lg bg-zinc-900/30 border border-white/10 animate-pulse"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    ),
+  }
 );
 
 const CTA = dynamic(
@@ -37,7 +60,7 @@ const CTA = dynamic(
 export default function Home() {
   return (
     <main className="relative bg-black content-visibility-auto contain-layout">
-      <Hero imageSrc="/Images/hero.png" />
+      <Hero />
       <TechStack />
       <ViosShowcase />
       <BentoGrid />

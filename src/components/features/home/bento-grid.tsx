@@ -86,8 +86,7 @@ function BentoCard({
       <div className="relative z-10">
         <h3
           className={cn(
-            "text-xl md:text-2xl font-bold text-white mb-2",
-            "group-hover:text-white transition-colors",
+            "text-xl md:text-2xl font-bold text-gradient-metallic mb-2",
           )}
         >
           {title}
@@ -132,7 +131,7 @@ export function BentoGrid() {
           onAnimationComplete={() => clearWillChange(titleRef.current)}
           style={{ willChange: "transform, opacity" }}
           className={cn(
-            "text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12 md:mb-16",
+            "text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-metallic mb-12 md:mb-16",
             "text-center md:text-left",
           )}
         >

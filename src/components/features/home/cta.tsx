@@ -69,7 +69,7 @@ export function CTA() {
           <h2
             className={cn(
               "text-4xl md:text-5xl lg:text-6xl",
-              "font-bold tracking-tighter text-white mb-4",
+              "font-bold tracking-tighter text-gradient-metallic mb-4",
               "text-center",
             )}
           >

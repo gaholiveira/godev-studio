@@ -107,7 +107,7 @@ export function ViosShowcase() {
             {/* Title */}
             <h2
               className={cn(
-                "text-4xl md:text-5xl lg:text-6xl font-light text-white",
+                "text-4xl md:text-5xl lg:text-6xl font-light text-gradient-metallic",
                 "leading-tight tracking-tight"
               )}
             >

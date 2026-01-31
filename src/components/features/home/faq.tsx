@@ -94,7 +94,7 @@ export function FAQ() {
         >
           <h2
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4",
+              "text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-metallic mb-4",
             )}
           >
             <MaskedTextReveal delay={0.1}>

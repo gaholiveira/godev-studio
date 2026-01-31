@@ -109,7 +109,7 @@ function PricingCard({
 
       {/* Header */}
       <div className="relative z-10 mb-6">
-        <h3 className={cn("text-2xl md:text-3xl font-bold text-white mb-2")}>
+        <h3 className={cn("text-2xl md:text-3xl font-bold text-gradient-metallic mb-2")}>
           {title}
         </h3>
         {description && (
@@ -124,7 +124,7 @@ function PricingCard({
           <div className="flex items-baseline gap-2">
             <span
               className={cn(
-                "font-bold text-white",
+                "font-bold text-gradient-metallic",
                 isFeatured
                   ? "text-5xl md:text-6xl"
                   : "text-4xl md:text-5xl",
@@ -244,7 +244,7 @@ export function Pricing() {
         >
           <h2
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4",
+              "text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-metallic mb-4",
             )}
           >
             <MaskedTextReveal delay={0.1}>
