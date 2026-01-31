@@ -16,7 +16,7 @@ export default function ObrigadoPage() {
         </h1>
 
         {/* Subtítulo */}
-        <p className="text-lg md:text-xl text-zinc-400 max-w-xl mx-auto">
+        <p className="text-lg md:text-xl text-zinc-300 max-w-xl mx-auto">
           Sua assinatura foi confirmada. Estamos prontos para escalar seu
           projeto.
         </p>
@@ -36,7 +36,7 @@ export default function ObrigadoPage() {
                 <h3 className="text-white font-medium mb-1">
                   Verifique seu E-mail
                 </h3>
-                <p className="text-zinc-400 text-sm">
+                <p className="text-zinc-300 text-sm">
                   Enviamos o convite do seu Quadro de Projetos exclusivo.
                 </p>
               </div>
@@ -51,7 +51,7 @@ export default function ObrigadoPage() {
                 <h3 className="text-white font-medium mb-1">
                   Acesse o Painel
                 </h3>
-                <p className="text-zinc-400 text-sm">
+                <p className="text-zinc-300 text-sm">
                   Aceite o convite para entrar no seu board de gestão.
                 </p>
               </div>
@@ -66,7 +66,7 @@ export default function ObrigadoPage() {
                 <h3 className="text-white font-medium mb-1">
                   Crie sua primeira tarefa
                 </h3>
-                <p className="text-zinc-400 text-sm">
+                <p className="text-zinc-300 text-sm">
                   Descreva o que precisamos fazer e iniciaremos em até 24h.
                 </p>
               </div>

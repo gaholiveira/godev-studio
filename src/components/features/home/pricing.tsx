@@ -136,7 +136,7 @@ function PricingCard({
           {subtitle && (
             <TextRevealBlur
               delay={0.6}
-              className="text-xs md:text-sm text-zinc-400 block"
+              className="text-xs md:text-sm text-zinc-300 block"
             >
               {subtitle}
             </TextRevealBlur>
@@ -218,14 +218,14 @@ export function Pricing() {
       id="planos"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "-50px" }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
       transition={{
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
       onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
-      className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout"
+      className="py-16 md:py-24 bg-zinc-950 contain-layout"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -233,9 +233,9 @@ export function Pricing() {
           ref={headerRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
           transition={{
-            duration: 0.7,
+            duration: 0.5,
             ease: [0.22, 1, 0.36, 1],
           }}
           onAnimationComplete={() => clearWillChange(headerRef.current)}
@@ -247,12 +247,12 @@ export function Pricing() {
               "text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-metallic mb-4",
             )}
           >
-            <MaskedTextReveal delay={0.1}>
+            <MaskedTextReveal delay={0}>
               Investimento Transparente.
             </MaskedTextReveal>
           </h2>
           <TextRevealBlur
-            delay={0.15}
+            delay={0}
             className={cn(
               "text-base md:text-lg text-zinc-300 max-w-2xl mx-auto",
               "block",

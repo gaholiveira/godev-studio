@@ -8,7 +8,7 @@ export default function PrivacyPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
               Política de Privacidade
             </h1>
-            <p className="text-zinc-400 text-lg">
+            <p className="text-zinc-300 text-lg">
               Transparência e Segurança de Dados
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
                   Para isso, envie um e-mail para{" "}
                   <a
                     href="mailto:developergabrielh@gmail.com"
-                    className="text-zinc-400 hover:text-white transition-colors underline"
+                    className="text-zinc-300 hover:text-white transition-colors underline"
                   >
                     developergabrielh@gmail.com
                   </a>

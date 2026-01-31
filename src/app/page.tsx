@@ -2,26 +2,27 @@
 
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/features/home/hero";
+import { DeferredBelowFold } from "@/components/deferred-below-fold";
 
-/** Seções abaixo do hero: JS em chunks separados, carregados quando necessário */
+/** Seções abaixo do hero: chunks carregados após requestIdleCallback (fora do caminho crítico) */
 const TechStack = dynamic(
   () => import("@/components/features/home/tech-stack").then((m) => ({ default: m.TechStack })),
-  { ssr: true }
+  { ssr: false }
 );
 
 const ViosShowcase = dynamic(
   () => import("@/components/features/home/vios-showcase").then((m) => ({ default: m.ViosShowcase })),
-  { ssr: true }
+  { ssr: false }
 );
 
 const BentoGrid = dynamic(
   () => import("@/components/features/home/bento-grid").then((m) => ({ default: m.BentoGrid })),
-  { ssr: true }
+  { ssr: false }
 );
 
 const Pricing = dynamic(
   () => import("@/components/features/home/pricing").then((m) => ({ default: m.Pricing })),
-  { ssr: true }
+  { ssr: false }
 );
 
 const FAQ = dynamic(
@@ -31,7 +32,7 @@ const FAQ = dynamic(
     loading: () => (
       <section
         id="faq"
-        className="py-16 md:py-24 bg-zinc-950 min-h-[320px] content-visibility-auto contain-layout"
+        className="py-16 md:py-24 bg-zinc-950 min-h-[520px] contain-layout"
         aria-hidden="true"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,19 +55,21 @@ const FAQ = dynamic(
 
 const CTA = dynamic(
   () => import("@/components/features/home/cta").then((m) => ({ default: m.CTA })),
-  { ssr: true }
+  { ssr: false }
 );
 
 export default function Home() {
   return (
-    <main className="relative bg-black content-visibility-auto contain-layout">
+    <main className="relative bg-black contain-layout">
       <Hero />
-      <TechStack />
-      <ViosShowcase />
-      <BentoGrid />
-      <Pricing />
-      <FAQ />
-      <CTA />
+      <DeferredBelowFold>
+        <TechStack />
+        <ViosShowcase />
+        <BentoGrid />
+        <Pricing />
+        <FAQ />
+        <CTA />
+      </DeferredBelowFold>
     </main>
   );
 }

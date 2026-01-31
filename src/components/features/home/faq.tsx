@@ -68,14 +68,14 @@ export function FAQ() {
       id="faq"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "-50px" }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
       transition={{
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
       }}
       onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
-      className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout"
+      className="py-16 md:py-24 bg-zinc-950 contain-layout"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -83,9 +83,9 @@ export function FAQ() {
           ref={headerRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
           transition={{
-            duration: 0.7,
+            duration: 0.5,
             ease: [0.22, 1, 0.36, 1],
           }}
           onAnimationComplete={() => clearWillChange(headerRef.current)}
@@ -97,7 +97,7 @@ export function FAQ() {
               "text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-metallic mb-4",
             )}
           >
-            <MaskedTextReveal delay={0.1}>
+            <MaskedTextReveal delay={0}>
               Perguntas Frequentes
             </MaskedTextReveal>
           </h2>

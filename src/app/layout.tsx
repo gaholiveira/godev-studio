@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import { DeferredScripts } from "@/components/deferred-scripts";
 
+const Header = dynamic(
+  () => import("@/components/layout/header").then((m) => ({ default: m.Header })),
+  { ssr: true }
+);
+
+const Footer = dynamic(
+  () => import("@/components/layout/footer").then((m) => ({ default: m.Footer })),
+  { ssr: true }
+);
+
+/* adjustFontFallback reduz CLS na troca de fonte (fallback com métricas similares) */
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
   adjustFontFallback: true,
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
@@ -17,6 +28,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   adjustFontFallback: true,
+  preload: false,
 });
 
 const siteUrl =

@@ -15,16 +15,16 @@ export function CTA() {
       id="cta"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "-50px" }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
       transition={{
-        duration: 0.9,
+        duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
         "relative overflow-hidden",
         "bg-zinc-950 border-y border-white/5",
         "py-16 md:py-24",
-        "content-visibility-auto contain-layout",
+        "contain-layout",
       )}
     >
 
@@ -36,8 +36,8 @@ export function CTA() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className={cn(
             "relative",
             "bg-zinc-900/30 backdrop-blur-md",
@@ -73,14 +73,14 @@ export function CTA() {
               "text-center",
             )}
           >
-            <MaskedTextReveal delay={0.1}>
+            <MaskedTextReveal delay={0}>
               Pronto para escalar seu produto?
             </MaskedTextReveal>
           </h2>
 
           {/* Subtexto com Benefício */}
           <TextRevealBlur
-            delay={0.2}
+            delay={0}
             className={cn(
               "text-base md:text-lg text-zinc-300 mb-8",
               "max-w-2xl mx-auto text-center",
@@ -139,7 +139,7 @@ export function CTA() {
           </div>
 
           {/* Social Proof Sutil */}
-          <div className="relative z-10 mt-8 flex items-center justify-center gap-6 text-sm text-zinc-400">
+          <div className="relative z-10 mt-8 flex items-center justify-center gap-6 text-sm text-zinc-300">
             <div className="flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
               <span>Disponível agora</span>

@@ -108,7 +108,7 @@ export function TechStack() {
       onAnimationComplete={() => clearWillChange(sectionRef.current)}
       style={{ willChange: "transform, opacity" }}
       ref={sectionRef}
-      className={cn("py-16 md:py-24 border-t border-white/5 bg-zinc-950 content-visibility-auto contain-layout")}
+      className={cn("py-16 md:py-24 border-t border-white/5 bg-zinc-950 contain-layout")}
     >
       <div className={cn("max-w-7xl mx-auto px-4 sm:px-6 lg:px-8")}>
         <div
@@ -119,7 +119,7 @@ export function TechStack() {
           {/* Label com reveal sutil */}
           <KickerReveal
             className={cn(
-              "text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-8",
+              "text-xs font-semibold tracking-widest text-zinc-300 uppercase mb-8",
             )}
             delay={0}
           >

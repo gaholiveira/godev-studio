@@ -116,16 +116,16 @@ export function BentoGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="servicos" className="py-16 md:py-24 bg-zinc-950 content-visibility-auto contain-layout">
+    <section id="servicos" className="py-16 md:py-24 bg-zinc-950 contain-layout">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <motion.h2
           ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
           transition={{
-            duration: 0.7,
+            duration: 0.5,
             ease: [0.22, 1, 0.36, 1],
           }}
           onAnimationComplete={() => clearWillChange(titleRef.current)}
@@ -135,7 +135,7 @@ export function BentoGrid() {
             "text-center md:text-left",
           )}
         >
-          <MaskedTextReveal delay={0.1}>
+          <MaskedTextReveal delay={0}>
             Desenvolvimento como Produto.
           </MaskedTextReveal>
         </motion.h2>

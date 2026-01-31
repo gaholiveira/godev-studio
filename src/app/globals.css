@@ -172,12 +172,13 @@
     background-repeat: repeat;
   }
 
-  /* Contraste WCAG AA: parágrafos em zinc-300 (~7.5:1 em zinc-950) */
+  /* Contraste WCAG AA: texto legível para todos (≥4.5:1 em zinc-950) */
+  /* zinc-300 ≈ 7.5:1 | zinc-400 ≈ 4.8:1 (evitar em texto longo) */
   p {
     @apply text-zinc-300;
   }
 
-  /* Títulos: zinc-100/200 para contraste suficiente */
+  /* Títulos: zinc-100/200 para contraste alto */
   h1, h2 {
     @apply text-zinc-100;
   }
@@ -283,12 +284,17 @@
   }
 }
 
-/* Performance: content-visibility e contain para seções abaixo da dobra */
+/*
+ * content-visibility-auto: evite em main/seções visíveis — o placeholder
+ * (contain-intrinsic-size) pode não bater com a altura real e causar CLS
+ * quando o conteúdo é “revelado”. Mantido só para uso pontual com altura conhecida.
+ */
 .content-visibility-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 400px;
 }
 
+/* contain-layout: reduz reflow sem alterar tamanho; seguro para CLS */
 .contain-layout {
   contain: layout style;
 }

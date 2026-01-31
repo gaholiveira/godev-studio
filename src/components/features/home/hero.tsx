@@ -7,8 +7,7 @@ export function Hero() {
       className={cn(
         "relative flex min-h-svh-stable flex-col items-center justify-center",
         "bg-zinc-950 px-4 py-20 md:py-32",
-        "overflow-hidden",
-        "contain-layout",
+        "overflow-hidden contain-layout",
       )}
       aria-label="Hero"
     >

@@ -50,16 +50,16 @@ export function ViosShowcase() {
       ref={containerRef}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "-50px" }}
+      viewport={{ once: true, amount: 0, margin: "0px 0px 250px 0px" }}
       transition={{
-        duration: 0.9,
+        duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
         "relative overflow-hidden",
         "border-y border-white/5 bg-zinc-900/20",
         "group cursor-pointer",
-        "content-visibility-auto contain-layout"
+        "contain-layout"
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -97,7 +97,7 @@ export function ViosShowcase() {
             {/* Eyebrow */}
             <p
               className={cn(
-                "text-xs tracking-widest uppercase text-zinc-400",
+                "text-xs tracking-widest uppercase text-zinc-300",
                 "font-medium"
               )}
             >
@@ -111,7 +111,7 @@ export function ViosShowcase() {
                 "leading-tight tracking-tight"
               )}
             >
-              <MaskedTextReveal delay={0.2}>
+              <MaskedTextReveal delay={0}>
                 Vios Labs: Pharmaceutical Luxury.
               </MaskedTextReveal>
             </h2>
